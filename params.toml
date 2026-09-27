@@ -1,0 +1,11 @@
+[paths]
+raw_pdf = "data/raw/civil_code_1948.pdf"
+articles_json = "data/processed/articles.json"
+
+
+[extraction]
+include_repealed_placeholders = false
+validate_schema = true
+ensure_ascii = false
+indent = 2
+
