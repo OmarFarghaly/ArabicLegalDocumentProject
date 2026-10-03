@@ -31,7 +31,9 @@ class IndexingStore:
         #add data 
         for record in tqdm.tqdm(self.read_data()):
             
-            if  len(record.get("text_en")) < 10 and len(record.get("ar_text")) < 10:
+            text_en = (record.get("text_en") or "").strip()
+            ar_text = (record.get("ar_text") or "").strip()
+            if len(text_en) < 10 or len(ar_text) < 10:
                 continue
             
             payload = Payload(**record)
