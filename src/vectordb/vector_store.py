@@ -79,27 +79,27 @@ class QdrantVectorStore:
         
         response = self.client.count(collection_name=collection_name)
         
-        if payload.ar_text :
+        if  payload.ar_text.strip() and payload.text_en.strip():
             
-            ar_vector = self.arabic_embedding.encode(text= payload.ar_text)
+            #raise ValueError("Both ar_text and text_en are required to create a point")
+
+            ar_vector = self.arabic_embedding.encode(text=payload.ar_text)
+            en_vector = self.english_embedding.encode(text=payload.text_en)
         
-        if payload.text_en:
-            
-            en_vector = self.english_embedding.encode(text = payload.text_en)
             
             
-        points = [models.PointStruct(id=response.count, 
-                                     vector={"english":en_vector , 
-                                             "arabic":ar_vector} ,
-                                     
-                                     payload=payload.model_dump()
-                                     
-                                    )
-        ]
-        self.client.upsert(
-            collection_name=collection_name, 
-            points=points
-        )
+            points = [models.PointStruct(id=response.count, 
+                                        vector={"english":en_vector , 
+                                                "arabic":ar_vector} ,
+                                        
+                                        payload=payload.model_dump()
+                                        
+                                        )
+            ]
+            self.client.upsert(
+                collection_name=collection_name, 
+                points=points
+            )
         
     # async def search(self, collection_name:str , text:str,
     #                 reterival_limit:int, score_threshold:float , reterival_renkad_limit:int,
