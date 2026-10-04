@@ -15,6 +15,22 @@ class Config(BaseSettings):
     ENSURE_ASCII: bool = False
     INDENT: int = 2
 
+    LLM_PROVIDER: str = "vllm"
+    LLM_MODEL_NAME: str = "" #NOT YET SET
+    LLM_BASE_URL: str = "http://localhost:8000/v1"
+    LLM_API_KEY: str = "EMPTY"
+    LLM_TIMEOUT_SECONDS: int = 120
+    LLM_MAX_TOKENS: int = 512
+    LLM_TEMPERATURE: float = 0.2
+    LLM_TOP_P: float = 0.95
+    LLM_REPETITION_PENALTY: float = 1.05
+    LLM_STREAMING_ENABLED: bool = True
+    LLM_SYSTEM_PROMPT: str = "You are a legal assistant. Answer using only the provided legal context. If the answer is not supported by the retrieved legal documents, say so clearly."
+    LLM_MAX_CONTEXT_DOCS: int = 5
+    LLM_MAX_CONTEXT_CHARS: int = 12000
+    LLM_RETRY_COUNT: int = 2
+    LLM_RETRY_BACKOFF_SECONDS: int = 2
+
     model_config = SettingsConfigDict(
         env_file=".env",
     )
