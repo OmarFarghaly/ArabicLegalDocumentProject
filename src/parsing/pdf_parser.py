@@ -257,25 +257,42 @@ def context_at(timeline: list[tuple[float, Context]], spos: float) -> Context:
 
 def find_articles(lines: list[Line], timeline) -> list[dict]:
     """
-    Find Article 1, Article 2, Article 3, etc.
+    Find actual article headings such as:
+        Article 451
+        rticle 452
+        Article 453
+
+    Avoid references such as:
+        Article 444.
     """
     articles = []
+
     for line in lines:
         if line.col != "en":
             continue
-        m = re.match(r"^Article\s+(\d+)\b", line.text, re.I)
+
+        text = line.text.strip()
+
+        m = re.fullmatch(
+            r"A?rticle\s+(\d+)",
+            text,
+            re.I,
+        )
+
         if not m:
             continue
+
         n = int(m.group(1))
+
         articles.append({
             "number": n,
             "page": line.page,
             "start": line.spos,
             "context": context_at(timeline, line.spos),
         })
+
     articles.sort(key=lambda a: a["start"])
     return articles
-
 
 def find_repealed_ranges(lines: list[Line]) -> list[tuple[int, int, int, float]]:
     """
