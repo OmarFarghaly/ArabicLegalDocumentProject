@@ -8,8 +8,17 @@ class Config(BaseSettings):
     ARABIC_EMBEDDING:str
     COLLECTION_NAME:str
     
-    model_config = SettingsConfigDict(env_file=".env")
-    
+    RAW_PDF: str
+    ARTICLES_JSON: str
+
+    VALIDATE_SCHEMA: bool = True
+    ENSURE_ASCII: bool = False
+    INDENT: int = 2
+
+    model_config = SettingsConfigDict(
+        env_file=".env",
+    )
+        
 # if __name__ == '__main__':
 #     setting = Config()
     

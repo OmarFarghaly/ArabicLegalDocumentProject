@@ -1,7 +1,7 @@
 from pydantic import BaseModel, ConfigDict
 
 
-class ArticleRecord(BaseModel):
+class ExtractedRecord(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     article_number: int
@@ -14,4 +14,5 @@ class ArticleRecord(BaseModel):
     is_repealed: bool
     source_page: int
     citation: str
+
     
