@@ -3,9 +3,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from src.legal_chatbot.config import PROJECT_ROOT, load_params
-from src.legal_chatbot.ingestion.civil_code_parser import extract_records
-from src.legal_chatbot.schemas.article import ArticleRecord
+from legal_chatbot.config import PROJECT_ROOT, load_params
+from parsing.pdf_parser import extract_records
+from legal_chatbot.schemas.article import ArticleRecord
 
 
 def main() -> None:
@@ -33,3 +33,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    

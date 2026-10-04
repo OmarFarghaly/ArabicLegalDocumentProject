@@ -10,3 +10,4 @@ PARAMS_FILE = PROJECT_ROOT / "params.toml"
 def load_params(path: Path = PARAMS_FILE) -> dict:
     with path.open("rb") as f:
         return tomllib.load(f)
+    

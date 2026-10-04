@@ -1,20 +1,29 @@
 [project]
-name = "legal-chatbot"
+name = "arabiclegaldocumentproject"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [
-    { name = "MagdaElkot", email = "magda.elkot@fedis.com.eg" }
+    { name = "MohamedSamy853", email = "mohamed.samy.2248369@gmail.com" }
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
+    "langdetect>=1.0.9",
     "pydantic>=2.13.5",
+    "pydantic-settings>=2.15.0",
     "pymupdf>=1.28.2",
+    "python-dotenv>=1.2.4",
+    "qdrant-client>=1.19.1",
+    "sentence-transformers>=6.1.0",
+    "tqdm>=4.70.1",
 ]
 
 [project.scripts]
-arabiclegaldocumentproject = "arabiclegaldocumentproject:main"
-
+build_index = "vectordb.build_index:main"
 [build-system]
-requires = ["uv_build>=0.12.19,<0.13.0"]
+requires = ["uv_build>=0.12.5,<0.13.0"]
 build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "legal_chatbot"
+module-root = "src"
