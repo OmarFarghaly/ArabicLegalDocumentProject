@@ -27,3 +27,24 @@ build-backend = "uv_build"
 [tool.uv.build-backend]
 module-root = "src"
 namespace = true
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.16.10",
+]
+
+
+[tool.pytest.ini_options]
+pythonpath = [".", "src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+extend-exclude = ["experiments"]
+
+[tool.ruff.lint]
+# Start small: E/F = real errors, I = import sorting
+select = ["E", "F", "I"]
