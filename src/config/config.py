@@ -17,7 +17,7 @@ class Config(BaseSettings):
 
     LLM_PROVIDER: str = "vllm"
     LLM_MODEL_NAME: str = "" #NOT YET SET
-    LLM_BASE_URL: str = "http://localhost:8000/v1"
+    LLM_BASE_URL: str = "http://localhost:12434/engines/v1"
     LLM_API_KEY: str = "EMPTY"
     LLM_TIMEOUT_SECONDS: int = 120
     LLM_MAX_TOKENS: int = 512
