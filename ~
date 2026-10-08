@@ -1,0 +1,19 @@
+modified .env.example
+added embedding models names for arabic and english
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Thu Oct 8 14:33:58 2026 +0300
+#
+# interactive rebase in progress; onto 4a9743a
+# Last command done (1 command done):
+#    pick 16fdf6d # add serach vectordb
+# Next command to do (1 remaining command):
+#    pick 3bbdba9 # add .env.example
+# You are currently editing a commit while rebasing branch 'legal_document/building_vectordb' on '4a9743a'.
+#
+# Changes to be committed:
+#	modified:   .env.example
+#	modified:   experiments/experiment.ipynb
+#	new file:   src/retrieval/reterival.py
+#
