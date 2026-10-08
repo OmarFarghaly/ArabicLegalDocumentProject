@@ -1,23 +1,25 @@
 from abc import ABC, abstractmethod
-
-from llm.model import LLMResponse
-from llm.model import LLMRequest
+from collections.abc import AsyncIterator
+from schemas.llm import LLMRequest, LLMResponse
 
 
 class BaseLLM(ABC):
 
     @abstractmethod
-    def generate(self, request: LLMRequest) -> LLMResponse:
+    async def generate(self, request: LLMRequest) -> LLMResponse:
         pass
 
     @abstractmethod
-    def stream_generate(self, request: LLMRequest):
+    async def stream_generate(
+        self,
+        request: LLMRequest,
+    ) -> AsyncIterator[str]:
         pass
 
     @abstractmethod
-    def health_check(self) -> bool:
+    async def health_check(self) -> bool:
         pass
 
     @abstractmethod
-    def close(self) -> None:
+    async def close(self) -> None:
         pass

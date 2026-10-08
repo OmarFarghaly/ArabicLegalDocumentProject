@@ -1,100 +1,87 @@
-# src/llm/providers/vllm_client.py
-
 import time
-from collections.abc import Generator
+from collections.abc import AsyncIterator
 
-from openai import OpenAI
+from openai import AsyncOpenAI
 
-from src.config import Config
-from src.llm.base import BaseLLM
-from src.schemas import LLMRequest, LLMResponse
+from config import Config
+from llm.base import BaseLLM
+from schemas.llm import LLMRequest, LLMResponse
 
 
 class VLLMClient(BaseLLM):
     def __init__(self, config: Config):
         self.config = config
-
-        self.client = OpenAI(
+        self.client = AsyncOpenAI(
             base_url=config.LLM_BASE_URL,
             api_key=config.LLM_API_KEY,
             timeout=config.LLM_TIMEOUT_SECONDS,
         )
 
-    def generate(self, request: LLMRequest) -> LLMResponse:
-        start_time = time.perf_counter()
-
-        messages = []
-
+    def _build_messages(self, request: LLMRequest) -> list[dict[str, str]]:
         system_prompt = (
             request.system_prompt
-            or self.config.LLM_SYSTEM_PROMPT
+            if request.system_prompt is not None
+            else self.config.LLM_SYSTEM_PROMPT
         )
-
-        messages.append({
-            "role": "system",
-            "content": system_prompt,
-        })
 
         user_content = ""
 
         if request.chat_history:
             user_content += "Previous conversation:\n"
             for message in request.chat_history:
-                user_content += (
-                    f"{message.role}: {message.content}\n"
-                )
+                user_content += f"{message.role}: {message.content}\n"
             user_content += "\n"
 
         if request.context_documents:
             user_content += "Legal context:\n"
-            for i, document in enumerate(
-                request.context_documents, start=1
-            ):
+            for i, document in enumerate(request.context_documents, start=1):
                 user_content += f"[Document {i}]\n{document}\n\n"
 
         user_content += f"Current question:\n{request.query}"
 
-        messages.append({
-            "role": "user",
-            "content": user_content,
-        })
+        return [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_content},
+        ]
 
-        max_tokens = (
-            request.max_tokens
-            or self.config.LLM_MAX_TOKENS
-        )
-        temperature = (
-            request.temperature
-            or self.config.LLM_TEMPERATURE
-        )
-        top_p = request.top_p or self.config.LLM_TOP_P
-        repetition_penalty = (
-            request.repetition_penalty
-            or self.config.LLM_REPETITION_PENALTY
-        )
+    def _generation_options(self, request: LLMRequest) -> dict:
+        return {
+            "model": self.config.LLM_MODEL_NAME,
+            "messages": self._build_messages(request),
+            "max_tokens": (
+                request.max_tokens
+                if request.max_tokens is not None
+                else self.config.LLM_MAX_TOKENS
+            ),
+            "temperature": (
+                request.temperature
+                if request.temperature is not None
+                else self.config.LLM_TEMPERATURE
+            ),
+            "top_p": (
+                request.top_p
+                if request.top_p is not None
+                else self.config.LLM_TOP_P
+            ),
+            #"extra_body": {
+            #    "repetition_penalty": (
+            #        request.repetition_penalty
+            #        if request.repetition_penalty is not None
+            #        else self.config.LLM_REPETITION_PENALTY
+            #    ),
+            #},
+        }
 
-        response = self.client.chat.completions.create(
-            #Create a chat completion
-            #using this model
-            #with these messages
-            #and these generation settings
+    async def generate(self, request: LLMRequest) -> LLMResponse:
+        start_time = time.perf_counter()
 
-            model=self.config.LLM_MODEL_NAME,
-            messages=messages,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            extra_body={
-                "repetition_penalty": repetition_penalty,
-            },
+        response = await self.client.chat.completions.create(
+            **self._generation_options(request),
             stream=False,
         )
 
         answer = response.choices[0].message.content or ""
-
-        latency_ms = int(
-            (time.perf_counter() - start_time) * 1000
-        )
+        latency_ms = int((time.perf_counter() - start_time) * 1000)
 
         usage = None
         if response.usage:
@@ -113,79 +100,26 @@ class VLLMClient(BaseLLM):
             usage=usage,
         )
 
-    def stream_generate(
+    async def stream_generate(
         self,
         request: LLMRequest,
-    ) -> Generator[str, None, None]:
-        messages = []
-
-        system_prompt = (
-            request.system_prompt
-            or self.config.LLM_SYSTEM_PROMPT
-        )
-
-        messages.append({
-            "role": "system",
-            "content": system_prompt,
-        })
-
-        user_content = ""
-
-        if request.chat_history:
-            user_content += "Previous conversation:\n"
-            for message in request.chat_history:
-                user_content += (
-                    f"{message.role}: {message.content}\n"
-                )
-            user_content += "\n"
-
-        if request.context_documents:
-            user_content += "Legal context:\n"
-            for i, document in enumerate(
-                request.context_documents, start=1
-            ):
-                user_content += f"[Document {i}]\n{document}\n\n"
-
-        user_content += f"Current question:\n{request.query}"
-
-        max_tokens = (
-            request.max_tokens
-            or self.config.LLM_MAX_TOKENS
-        )
-        temperature = (
-            request.temperature
-            or self.config.LLM_TEMPERATURE
-        )
-        top_p = request.top_p or self.config.LLM_TOP_P
-        repetition_penalty = (
-            request.repetition_penalty
-            or self.config.LLM_REPETITION_PENALTY
-        )
-
-        stream = self.client.chat.completions.create(
-            model=self.config.LLM_MODEL_NAME,
-            messages=messages,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            extra_body={
-                "repetition_penalty": repetition_penalty,
-            },
+    ) -> AsyncIterator[str]:
+        stream = await self.client.chat.completions.create(
+            **self._generation_options(request),
             stream=True,
         )
 
-        for chunk in stream:
+        async for chunk in stream:
             content = chunk.choices[0].delta.content
-
             if content:
                 yield content
 
-    def health_check(self) -> bool:
+    async def health_check(self) -> bool:
         try:
-            self.client.models.list()
+            await self.client.models.list()
             return True
         except Exception:
             return False
 
-    def close(self) -> None:
-        self.client.close()
+    async def close(self) -> None:
+        await self.client.close()
