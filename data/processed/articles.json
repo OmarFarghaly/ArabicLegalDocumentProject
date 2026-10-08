@@ -2993,23 +2993,11 @@
     "chapter": "Kinds of Conditions Modifying the Effects of Obligations",
     "section": "Plurality of Objects of an Obligation",
     "topic": "Alternative Obligations",
-    "ar_text": "إذا كان الخيار للمدين وامتنع عن االختيار أو تعدد المدينون ولم يتفقوا فيما بينهم، جاز للدائن أن يطلب من القاضي تعيين أجل يختار فيه المدين أو يتفق فيه المدينون، فإذا لم يتم ذلك تولي القاضي بنفسه تعيين محل االلتزام. أما إذا كان الخيار للدائن وامتنع عن االختيار أو تعدد الدائنون ولم يتفقوا فيما بينهم، عين القاضي أجال أن طلب المدين ذلك، فإذا انقضي األجل انتقل الخيار إلى المدين.",
-    "text_en": "If the option belongs to the debtor and he fails to elect, or if there are a number of debtors who do not agree amongst themselves, the creditor may apply to the judge to fix a term for the debtor to elect or for the several debtors to agree amongst themselves, failing which the judge will himself fix the object of the obligation. If the option belongs to the creditor and he fails to elect, or if there are a number of creditors who do not agree amongst themselves, the judge, if required by the debtor, will fix a term at the expiration of which the option will pass to the debtor.",
+    "ar_text": "إذا كان الخيار للمدين وامتنع عن االختيار أو تعدد المدينون ولم يتفقوا فيما بينهم، جاز للدائن أن يطلب من القاضي تعيين أجل يختار فيه المدين أو يتفق فيه المدينون، فإذا لم يتم ذلك تولي القاضي بنفسه تعيين محل االلتزام. أما إذا كان الخيار للدائن وامتنع عن االختيار أو تعدد الدائنون ولم يتفقوا فيما بينهم، عين القاضي أجال أن طلب المدين ذلك، فإذا انقضي األجل انتقل الخيار إلى المدين. إذا كان الخيار للمدين، ثم استحال تنفيذ كل من األشياء المتعددة التي اشتمل عليها محل االلتزام، وكان المدين مسئوال عن هذه االستحالة ولو فيما يتعلق بواحدة من هذه األشياء كان ملزما بأن يدفع قيمة أخر شيء استحال تنفيذه. ٢ - االلتزام البدل ي",
+    "text_en": "If the option belongs to the debtor and he fails to elect, or if there are a number of debtors who do not agree amongst themselves, the creditor may apply to the judge to fix a term for the debtor to elect or for the several debtors to agree amongst themselves, failing which the judge will himself fix the object of the obligation. If the option belongs to the creditor and he fails to elect, or if there are a number of creditors who do not agree amongst themselves, the judge, if required by the debtor, will fix a term at the expiration of which the option will pass to the debtor. one of the several prestations included in the object of the obligation can be performed, he shall be bound to pay the value of the last of the prestations that became impossible to perform if he is responsible for the impossibility of performance even as regards one only of the prestations.",
     "is_repealed": false,
     "source_page": 36,
     "citation": "Egyptian Civil Code, Article 276"
-  },
-  {
-    "article_number": 277,
-    "book": "Obligations or Personal Rights",
-    "chapter": "Kinds of Conditions Modifying the Effects of Obligations",
-    "section": "Plurality of Objects of an Obligation",
-    "topic": "Alternative Obligations",
-    "ar_text": "إذا كان الخيار للمدين، ثم استحال تنفيذ كل من األشياء المتعددة التي اشتمل عليها محل االلتزام، وكان المدين مسئوال عن هذه االستحالة ولو فيما يتعلق بواحدة من هذه األشياء كان ملزما بأن يدفع قيمة أخر شيء استحال تنفيذه. ٢ - االلتزام البدل ي",
-    "text_en": "If the option belongs to the debtor and not one of the several prestations included in the object of the obligation can be performed, he shall be bound to pay the value of the last of the prestations that became impossible to perform if he is responsible for the impossibility of performance even as regards one only of the prestations.",
-    "is_repealed": false,
-    "source_page": 36,
-    "citation": "Egyptian Civil Code, Article 277"
   },
   {
     "article_number": 278,
@@ -4740,28 +4728,28 @@
     "citation": "Egyptian Civil Code, Article 450"
   },
   {
-    "article_number": 444,
-    "book": "Obligations or Personal Rights",
-    "chapter": "Contracts as Regards Ownership",
-    "section": "Sale",
-    "topic": "Obligations of the Vendor",
-    "ar_text": "",
-    "text_en": ".",
-    "is_repealed": false,
-    "source_page": 59,
-    "citation": "Egyptian Civil Code, Article 444"
-  },
-  {
     "article_number": 451,
     "book": "Obligations or Personal Rights",
     "chapter": "Contracts as Regards Ownership",
     "section": "Sale",
     "topic": "Obligations of the Vendor",
-    "ar_text": "تبقي دعوى الضمان ولو هلك المبيع بأي سبب كان. تسقط بالتقادم دعوى الضمان إذا انقضت سنة من وقت تسليم المبيع ولو لم يكشف المشتري العيب إال بعد ذلك ما لم يقبل البائع أن يلتزم بالضمان لمدة أطول. على أنه ال يجوز للبائع أن يتمسك بالنسبة لتمام التقادم إذا ثبت به تعمد إخفاء العيب غشا منه.",
-    "text_en": "An action on a warranty exists even if the thing sold has perished, whatever may be the cause. rticle 452 An action on a warranty is prescribed in one year from the time of delivery of the thing sold, even if the purchaser discovers the defect after the expiration of this delay, unless the vendor agrees to be bound by the warranty for a longer period. The vendor, however, cannot avail himself of the prescription of one year if it is proved that he has fraudulently concealed the defect from the purchaser.",
+    "ar_text": "تبقي دعوى الضمان ولو هلك المبيع بأي سبب كان.",
+    "text_en": "An action on a warranty exists even if the thing sold has perished, whatever may be the cause.",
     "is_repealed": false,
     "source_page": 59,
     "citation": "Egyptian Civil Code, Article 451"
+  },
+  {
+    "article_number": 452,
+    "book": "Obligations or Personal Rights",
+    "chapter": "Contracts as Regards Ownership",
+    "section": "Sale",
+    "topic": "Obligations of the Vendor",
+    "ar_text": "تسقط بالتقادم دعوى الضمان إذا انقضت سنة من وقت تسليم المبيع ولو لم يكشف المشتري العيب إال بعد ذلك ما لم يقبل البائع أن يلتزم بالضمان لمدة أطول. على أنه ال يجوز للبائع أن يتمسك بالنسبة لتمام التقادم إذا ثبت به تعمد إخفاء العيب غشا منه.",
+    "text_en": "rticle 452 An action on a warranty is prescribed in one year from the time of delivery of the thing sold, even if the purchaser discovers the defect after the expiration of this delay, unless the vendor agrees to be bound by the warranty for a longer period. The vendor, however, cannot avail himself of the prescription of one year if it is proved that he has fraudulently concealed the defect from the purchaser.",
+    "is_repealed": false,
+    "source_page": 59,
+    "citation": "Egyptian Civil Code, Article 452"
   },
   {
     "article_number": 453,
@@ -7896,18 +7884,6 @@
     "citation": "Egyptian Civil Code, Article 713"
   },
   {
-    "article_number": 714,
-    "book": "Obligations or Personal Rights",
-    "chapter": "Contracts for the hire of services",
-    "section": "Mandate",
-    "topic": "The End of a Mandate",
-    "ar_text": "تنتهي الوكالة بإتمام العمل الموكل فيه أو بإ نه اء األجل المعين للوكالة وتنتهي أيضاً بموت الموكل أو الوكيل.",
-    "text_en": "The mandate comes to an end by the completion of the work or by the expiration of the period for which it was given and by the death of the mandator or of the mandatary.",
-    "is_repealed": false,
-    "source_page": 100,
-    "citation": "Egyptian Civil Code, Article 714"
-  },
-  {
     "article_number": 715,
     "book": "Obligations or Personal Rights",
     "chapter": "Contracts for the hire of services",
@@ -8273,23 +8249,11 @@
     "chapter": "Aleatory Contracts",
     "section": "Life Annuities",
     "topic": null,
-    "ar_text": "ال يكون للمستحق حق فى المرتب إال عن األيام التي عاشها من قرر المرتب مدى حياته. على أنه إذا اشترط الدفع مقدماً كان للمستحق حق فى القسط الذى حل",
-    "text_en": "A beneficiary is only entitled to the annuity for the number of days for which the person on whose life the annuity has been settled lives. When, however, it is provided that the annuity is payable in advance, the beneficiary will be entitled to the installment which has fallen due.",
+    "ar_text": "ال يكون للمستحق حق فى المرتب إال عن األيام التي عاشها من قرر المرتب مدى حياته. على أنه إذا اشترط الدفع مقدماً كان للمستحق حق فى القسط الذى حل إذا لم يقم المدين بالتزامه كان للمستحق أن يطلب تنفيذ العقد، فإن كان العقد بعوض جاز له أيضاً أن يطلب فسخه مع التعويض إن كان له محل. الفصل الثالث",
+    "text_en": "A beneficiary is only entitled to the annuity for the number of days for which the person on whose life the annuity has been settled lives. When, however, it is provided that the annuity is payable in advance, the beneficiary will be entitled to the installment which has fallen due. the beneficiary may demand due performance of the contract. He may also, if the contract is for valuable consideration, apply for the resiliation of the contract together with such damages as may be due.",
     "is_repealed": false,
     "source_page": 105,
     "citation": "Egyptian Civil Code, Article 745"
-  },
-  {
-    "article_number": 746,
-    "book": "Obligations or Personal Rights",
-    "chapter": "Aleatory Contracts",
-    "section": "Life Annuities",
-    "topic": null,
-    "ar_text": "إذا لم يقم المدين بالتزامه كان للمستحق أن يطلب تنفيذ العقد، فإن كان العقد بعوض جاز له أيضاً أن يطلب فسخه مع التعويض إن كان له محل. الفصل الثالث",
-    "text_en": "If the grantor does not fulfil his obligation, the beneficiary may demand due performance of the contract. He may also, if the contract is for valuable consideration, apply for the resiliation of the contract together with such damages as may be due.",
-    "is_repealed": false,
-    "source_page": 105,
-    "citation": "Egyptian Civil Code, Article 746"
   },
   {
     "article_number": 747,
@@ -9948,18 +9912,6 @@
     "citation": "Egyptian Civil Code, Article 884"
   },
   {
-    "article_number": 901,
-    "book": "Real Rights",
-    "chapter": "The Right of Ownership",
-    "section": "Acquisition of Ownership",
-    "topic": "Inventory of the Estate",
-    "ar_text": "",
-    "text_en": "has been delivered to him.",
-    "is_repealed": false,
-    "source_page": 127,
-    "citation": "Egyptian Civil Code, Article 901"
-  },
-  {
     "article_number": 885,
     "book": "Real Rights",
     "chapter": "The Right of Ownership",
@@ -10109,23 +10061,11 @@
     "chapter": "The Right of Ownership",
     "section": "Acquisition of Ownership",
     "topic": "Discharge of the Debts of the Estate",
-    "ar_text": "دائنو التركة الذين لم يستوفوا حقوقهم لعدم ظهورها فى قائمة الرد ولم تكن لهم تأمينات على أموال التركة، ال يجوز لهم أن يرجعوا على من كسب بحسن نية حقا عينيا على تلك األموال وإنما لهم الرجوع على الورثة بسبب إثرائهم.",
-    "text_en": "Creditors of the estate, whose debts have not been paid because they were not shown in the inventory and were not secured by a charge on the property of the estate, have no remedy against third parties who have acquired, in good faith, a real right on this property, but have a right of action against the heirs to the extent to which the heirs have benefited.",
+    "ar_text": "دائنو التركة الذين لم يستوفوا حقوقهم لعدم ظهورها فى قائمة الرد ولم تكن لهم تأمينات على أموال التركة، ال يجوز لهم أن يرجعوا على من كسب بحسن نية حقا عينيا على تلك األموال وإنما لهم الرجوع على الورثة بسبب إثرائهم. يتولى المصفى بعد تسوية ديون التركة تنفيذ الوصايا وغيرها من التكاليف. تسليم أموال التركة وقسمة هذه األموال",
+    "text_en": "Creditors of the estate, whose debts have not been paid because they were not shown in the inventory and were not secured by a charge on the property of the estate, have no remedy against third parties who have acquired, in good faith, a real right on this property, but have a right of action against the heirs to the extent to which the heirs have benefited. debts of the estate, proceed with the payment of the legacies and other charges.",
     "is_repealed": false,
     "source_page": 129,
     "citation": "Egyptian Civil Code, Article 897"
-  },
-  {
-    "article_number": 898,
-    "book": "Real Rights",
-    "chapter": "The Right of Ownership",
-    "section": "Acquisition of Ownership",
-    "topic": "Discharge of the Debts of the Estate",
-    "ar_text": "يتولى المصفى بعد تسوية ديون التركة تنفيذ الوصايا وغيرها من التكاليف. تسليم أموال التركة وقسمة هذه األموال",
-    "text_en": "An administrator shall, after discharge of the debts of the estate, proceed with the payment of the legacies and other charges.",
-    "is_repealed": false,
-    "source_page": 129,
-    "citation": "Egyptian Civil Code, Article 898"
   },
   {
     "article_number": 899,
@@ -10229,23 +10169,11 @@
     "chapter": "The Right of Ownership",
     "section": "Acquisition of Ownership",
     "topic": "Delivery and Division of the Property of the Estate",
-    "ar_text": "إذا اختص أحد الورثة عند القسمة بدين للتركة، فإن باقى الورثة ال يضمنون له المدين إذا هو أعسر بعد القسمة ما لم يوجد اتفاق يقضى بغير ذلك.",
-    "text_en": "If, at the time of division, a debt due to the estate is allocated to one of the heirs, the other heirs are not, in the absence of an agreement to the contrary, guarantors of the debtor, if he becomes insolvent subsequent to the division.",
+    "ar_text": "إذا اختص أحد الورثة عند القسمة بدين للتركة، فإن باقى الورثة ال يضمنون له المدين إذا هو أعسر بعد القسمة ما لم يوجد اتفاق يقضى بغير ذلك. تصح الوصية بقسمة أعيان التركة على الورثة الموصى، بحيث يعين لكل وارث أو لبعض الورثة قدر نصيبه فإن زادت قيمة ما عين ألحدهم على استحقاقه فى التركة كانت، الزيادة وصية.",
+    "text_en": "If, at the time of division, a debt due to the estate is allocated to one of the heirs, the other heirs are not, in the absence of an agreement to the contrary, guarantors of the debtor, if he becomes insolvent subsequent to the division. will dividing the property of the estate between the heirs of a testator and setting out the share of each heir or of certain of the heirs is valid. If the value of the share so given to one of them exceeds his hereditary share, the excess is deemed to a be a legacy by will.",
     "is_repealed": false,
     "source_page": 130,
     "citation": "Egyptian Civil Code, Article 907"
-  },
-  {
-    "article_number": 908,
-    "book": "Real Rights",
-    "chapter": "The Right of Ownership",
-    "section": "Acquisition of Ownership",
-    "topic": "Delivery and Division of the Property of the Estate",
-    "ar_text": "تصح الوصية بقسمة أعيان التركة على الورثة الموصى، بحيث يعين لكل وارث أو لبعض الورثة قدر نصيبه فإن زادت قيمة ما عين ألحدهم على استحقاقه فى التركة كانت، الزيادة وصية.",
-    "text_en": "A will dividing the property of the estate between the heirs of a testator and setting out the share of each heir or of certain of the heirs is valid. If the value of the share so given to one of them exceeds his hereditary share, the excess is deemed to a be a legacy by will.",
-    "is_repealed": false,
-    "source_page": 130,
-    "citation": "Egyptian Civil Code, Article 908"
   },
   {
     "article_number": 909,
@@ -11194,18 +11122,6 @@
     "is_repealed": false,
     "source_page": 142,
     "citation": "Egyptian Civil Code, Article 987"
-  },
-  {
-    "article_number": 993,
-    "book": "Real Rights",
-    "chapter": "Rights Derived From the Right of Ownership",
-    "section": "The Right to Usufruct, the right of User and the right of",
-    "topic": "1- Usufruct",
-    "ar_text": "",
-    "text_en": ".",
-    "is_repealed": false,
-    "source_page": 142,
-    "citation": "Egyptian Civil Code, Article 993"
   },
   {
     "article_number": 988,
@@ -12413,23 +12329,11 @@
     "chapter": "Judgment Charges upon Immovable Property",
     "section": "The Constitution of a Judgment Charge",
     "topic": null,
-    "ar_text": "على الدائن الذى يريد أخذ اختصاص على عقارات مدينة أن يقدم عريضة بذلك إلى رئيس المحكمة االبتدائية إلى تقع فى دائر ته ا العقارات التى يريد االختصاص ا به. ) ٢ ( وهذه العريضة يج ب أن يكون مصحوبة بصورة رسمية من الحكم أو بشهادة من قلم الكتاب مدون فيها منطوق الحكم، وأن تشتمل على البيانات اآلتية: أ ) أسم الدائن ولقبه وصناعته وموطنه األصلى والموطن المختار الذى يعنيه فى البلدة التى يقع فيها مقر المحكمة. ) ب ) أسم المدين ولقبه وصنا عته وموطنه. ) جـ ) تاريخ الحكم وبيان المحكمة التى أصدرته.، د ) مقدار الدين، فإذا كان الدين المذكور فى الحكم غير محدد المقدار تولى رئيس المحكمة تقديره مؤقتا وعين المبلغ الذى يؤخذ به حق االختصاص. ) هـ ) تعيين العقارات تعيينا دقيقا وبيان موقعها مع تقدي م األوراق الدالة على قيمتها.",
-    "text_en": "A creditor who wishes to obtain a judgment charge on the immovable property of his debtor must submit an application to the President of the Court of First Instance in the district in which the immovable property on which he desires to obtain the charge is situated. An authentic copy of the judgment or a certificate by the greffier of the Court containing the operative part of the judgement must be annexed to this application which will contain the following particulars: a- the creditor's surname, first names, profession, actual place of abode, and elected domicile within the town in which the Court is situated; b- the surname, first names, profession and place of abode of the debtor; c- the date of the judgment and designation of the Court that rendered the judgment; d- the amount of the debt. If the debt mentioned in the judgment is not a liquid amount, the President of the Court may liquidate it provisionally and fix the amount for which a judgment charge may be obtained; e- an exact and precise description of the immovable properties, their situation, together with documents establishing their value.",
+    "ar_text": "على الدائن الذى يريد أخذ اختصاص على عقارات مدينة أن يقدم عريضة بذلك إلى رئيس المحكمة االبتدائية إلى تقع فى دائر ته ا العقارات التى يريد االختصاص ا به. ) ٢ ( وهذه العريضة يج ب أن يكون مصحوبة بصورة رسمية من الحكم أو بشهادة من قلم الكتاب مدون فيها منطوق الحكم، وأن تشتمل على البيانات اآلتية: أ ) أسم الدائن ولقبه وصناعته وموطنه األصلى والموطن المختار الذى يعنيه فى البلدة التى يقع فيها مقر المحكمة. ) ب ) أسم المدين ولقبه وصنا عته وموطنه. ) جـ ) تاريخ الحكم وبيان المحكمة التى أصدرته.، د ) مقدار الدين، فإذا كان الدين المذكور فى الحكم غير محدد المقدار تولى رئيس المحكمة تقديره مؤقتا وعين المبلغ الذى يؤخذ به حق االختصاص. ) هـ ) تعيين العقارات تعيينا دقيقا وبيان موقعها مع تقدي م األوراق الدالة على قيمتها. ) ١ ( يدون رئيس المحكمة فى ذيل العريضة أمره باالختصاص. وإنما يجب عليه عند الترخيص به أن يراعى مقدار الدين وقمة العقارات المبينة بالعريض ة بوجه التقريب، وعند االقتضاء يجعل االختصاص مقصورا على بعض هذه العقارات أو على واحد منها فقط أو على جزء من أحدها إذا رأى ان ذلك كاف لتأمين دفع أصل الدين والفوائد والمصروفات المستحقة للدائنين.",
+    "text_en": "A creditor who wishes to obtain a judgment charge on the immovable property of his debtor must submit an application to the President of the Court of First Instance in the district in which the immovable property on which he desires to obtain the charge is situated. An authentic copy of the judgment or a certificate by the greffier of the Court containing the operative part of the judgement must be annexed to this application which will contain the following particulars: a- the creditor's surname, first names, profession, actual place of abode, and elected domicile within the town in which the Court is situated; b- the surname, first names, profession and place of abode of the debtor; c- the date of the judgment and designation of the Court that rendered the judgment; d- the amount of the debt. If the debt mentioned in the judgment is not a liquid amount, the President of the Court may liquidate it provisionally and fix the amount for which a judgment charge may be obtained; e- an exact and precise description of the immovable properties, their situation, together with documents establishing their value. order for a judgment charge at the foot of the application. The President of the Court should, however, in giving an order for a judgment charge, take into consideration the amount of the debt and the approximate value of the immovable properties set out in the application, and should, if necessary, restrict the judgment charge to some or only one of these immovables, or to a part in an immovable if he considers that this is sufficient to secure the principal of the debt, the interest thereon and the cost thereof due to the creditors.",
     "is_repealed": false,
     "source_page": 159,
     "citation": "Egyptian Civil Code, Article 1089"
-  },
-  {
-    "article_number": 1090,
-    "book": "Real Rights",
-    "chapter": "Judgment Charges upon Immovable Property",
-    "section": "The Constitution of a Judgment Charge",
-    "topic": null,
-    "ar_text": ") ١ ( يدون رئيس المحكمة فى ذيل العريضة أمره باالختصاص. وإنما يجب عليه عند الترخيص به أن يراعى مقدار الدين وقمة العقارات المبينة بالعريض ة بوجه التقريب، وعند االقتضاء يجعل االختصاص مقصورا على بعض هذه العقارات أو على واحد منها فقط أو على جزء من أحدها إذا رأى ان ذلك كاف لتأمين دفع أصل الدين والفوائد والمصروفات المستحقة للدائنين.",
-    "text_en": "The President of the Court will record his order for a judgment charge at the foot of the application. The President of the Court should, however, in giving an order for a judgment charge, take into consideration the amount of the debt and the approximate value of the immovable properties set out in the application, and should, if necessary, restrict the judgment charge to some or only one of these immovables, or to a part in an immovable if he considers that this is sufficient to secure the principal of the debt, the interest thereon and the cost thereof due to the creditors.",
-    "is_repealed": false,
-    "source_page": 159,
-    "citation": "Egyptian Civil Code, Article 1090"
   },
   {
     "article_number": 1091,
