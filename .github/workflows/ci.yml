@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install Python 3.13 and dependencies
+        run: |
+          uv python install 3.13
+          uv sync --frozen
+
+      - name: Lint (Ruff)
+        run: uv run ruff check .
+        continue-on-error: true
+
+      - name: Format check (Ruff)
+        run: uv run ruff format --check .
+        continue-on-error: true
+
+      - name: Unit tests
+        run: uv run pytest --cov=src --cov-report=term-missing
