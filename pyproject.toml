@@ -17,7 +17,6 @@ dependencies = [
     "sentence-transformers>=6.1.0",
     "tqdm>=4.70.1",
     "openai",
-<<<<<<< HEAD
     "fastapi>=0.143.0",
     "uvicorn>=0.54.0",
     "ragas>=0.4",
@@ -25,8 +24,6 @@ dependencies = [
     "vertexai>=1.71.1",
     "pillow>=12.3.0",
     "matplotlib>=3.11.2",
-=======
->>>>>>> 6b0cccc (V1-LLM)
 ]
 
 [project.scripts]
@@ -47,6 +44,7 @@ dev = [
     "ruff>=0.16.10",
 ]
 
+
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]
 testpaths = ["tests"]
@@ -57,4 +55,6 @@ target-version = "py313"
 extend-exclude = ["experiments"]
 
 [tool.ruff.lint]
+select = ["E", "F", "I"]
+# Start small: E/F = real errors, I = import sorting
 select = ["E", "F", "I"]
