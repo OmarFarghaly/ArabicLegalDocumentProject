@@ -17,10 +17,18 @@ dependencies = [
     "sentence-transformers>=6.1.0",
     "tqdm>=4.70.1",
     "openai",
+    "fastapi>=0.143.0",
+    "uvicorn>=0.54.0",
+    "ragas>=0.4",
+    "langchain-community<0.4.2",
+    "vertexai>=1.71.1",
+    "pillow>=12.3.0",
+    "matplotlib>=3.11.2",
 ]
 
 [project.scripts]
 build_index = "vectordb.build_index:main"
+
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]
 build-backend = "uv_build"
@@ -47,5 +55,6 @@ target-version = "py313"
 extend-exclude = ["experiments"]
 
 [tool.ruff.lint]
+select = ["E", "F", "I"]
 # Start small: E/F = real errors, I = import sorting
 select = ["E", "F", "I"]

@@ -1,0 +1,347 @@
+[
+  {
+    "user_input": "What is the legal age of majority?",
+    "response": "The age of majority is twenty-one years completed according to the Gregorian calendar."
+  },
+  {
+    "user_input": "ما هو سن الرشد القانوني؟",
+    "response": "سن الرشد هو إحدى وعشرون سنة ميلادية كاملة."
+  },
+  {
+    "user_input": "When does a person have full legal capacity to exercise civil rights?",
+    "response": "A person who has attained majority, possesses their mental faculties, and has not been placed under legal disability has full legal capacity to exercise their civil rights."
+  },
+  {
+    "user_input": "متى يكون الشخص كامل الأهلية لمباشرة حقوقه المدنية؟",
+    "response": "يكون الشخص كامل الأهلية لمباشرة حقوقه المدنية إذا بلغ سن الرشد، وكان متمتعاً بقواه العقلية، ولم يحجر عليه."
+  },
+  {
+    "user_input": "Who is considered incapable of exercising civil rights because of lack of discretion?",
+    "response": "A person who lacks discretion because of youth, feeble-mindedness, or insanity is incapable of exercising civil rights. A person who has not attained seven years of age is considered devoid of discretion."
+  },
+  {
+    "user_input": "من يعتبر فاقد التمييز وغير أهل لمباشرة حقوقه المدنية؟",
+    "response": "يكون فاقد التمييز من كان فاقد التمييز لصغر في السن أو عته أو جنون، وكل من لم يبلغ السابعة يعتبر فاقداً للتمييز."
+  },
+  {
+    "user_input": "What is the legal capacity of a person who has reached the age of discretion but not majority?",
+    "response": "A person who has reached the age of discretion but has not attained majority has limited legal capacity according to the provisions of the law."
+  },
+  {
+    "user_input": "ما حكم من بلغ سن التمييز ولم يبلغ سن الرشد؟",
+    "response": "يكون ناقص الأهلية وفقاً لما يقرره القانون."
+  },
+  {
+    "user_input": "What happens to persons deprived of full or partial legal capacity?",
+    "response": "They are governed, as the case may be, by the rules of natural or legal guardianship or curatorship, subject to the conditions and rules laid down by law."
+  },
+  {
+    "user_input": "هل يجوز للشخص التنازل عن أهليته القانونية؟",
+    "response": "لا يجوز لأحد التنازل عن أهليته أو تعديل الأحكام المتعلقة بها."
+  },
+  {
+    "user_input": "What property forms part of the public domain?",
+    "response": "Immovable and movable property owned by the State or other public juristic persons and allocated, in fact or by law, decree, or decision of the competent minister, for purposes of public utility forms part of the public domain."
+  },
+  {
+    "user_input": "ما الأموال التي تعتبر من الأموال العامة؟",
+    "response": "تعتبر أموالاً عامة العقارات والمنقولات التي للدولة أو للأشخاص الاعتبارية العامة والتي تكون مخصصة لمنفعة عامة بالفعل أو بمقتضى قانون أو مرسوم أو قرار من الوزير المختص."
+  },
+  {
+    "user_input": "Can public-domain property be seized or acquired by prescription?",
+    "response": "No. Public-domain property is not alienable, is not liable to seizure, and cannot be acquired by prescription."
+  },
+  {
+    "user_input": "هل يجوز الحجز على الأموال العامة أو تملكها بالتقادم؟",
+    "response": "لا يجوز التصرف في الأموال العامة أو الحجز عليها أو تملكها بالتقادم."
+  },
+  {
+    "user_input": "When does property lose its public-domain status?",
+    "response": "Property forming part of the public domain loses that status when its allocation for public utility ends, whether by law, decree, in fact, or because the purpose for which it was allocated comes to an end."
+  },
+  {
+    "user_input": "متى تفقد الأموال العامة صفتها العامة؟",
+    "response": "تفقد الأموال العامة صفتها العامة بانتهاء تخصيصها للمنفعة العامة، وينتهي التخصيص بمقتضى قانون أو مرسوم أو قرار من الوزير المختص أو بانتهاء الغرض الذي خصصت من أجله الأموال للمنفعة العامة."
+  },
+  {
+    "user_input": "What is the general limitation period for civil rights?",
+    "response": "The general limitation period is fifteen years unless a specific provision provides otherwise."
+  },
+  {
+    "user_input": "ما هي مدة التقادم العامة للحقوق المدنية؟",
+    "response": "مدة التقادم العامة هي خمس عشرة سنة، ما لم يوجد نص خاص يقضي بغير ذلك."
+  },
+  {
+    "user_input": "How long is the limitation period for recurring periodic rights such as rent, interest, wages, and pensions?",
+    "response": "The limitation period for recurring periodic rights, such as rent, interest, wages, pensions, and similar rights, is five years unless otherwise provided by law."
+  },
+  {
+    "user_input": "ما مدة التقادم بالنسبة للحقوق الدورية المتجددة مثل الأجرة والفوائد والأجور والمعاشات؟",
+    "response": "تتقادم الحقوق الدورية المتجددة، كالأجرة والفوائد والأجور والمعاشات، بخمس سنوات، ما لم يوجد نص خاص يقضي بغير ذلك."
+  },
+  {
+    "user_input": "What limitation period applies to claims of professionals such as doctors, pharmacists, lawyers, engineers, experts, receivers, brokers, and teachers?",
+    "response": "Claims of certain professionals, including physicians, pharmacists, lawyers, engineers, experts, receivers, brokers, and professors and teachers, are subject to a five-year limitation period under the special prescription rules."
+  },
+  {
+    "user_input": "ما مدة التقادم الخاصة بمطالبات بعض أصحاب المهن كالأطباء والصيادلة والمحامين والمهندسين والسماسرة؟",
+    "response": "تتقادم مطالبات بعض أصحاب المهن، ومنهم الأطباء والصيادلة والمحامون والمهندسون والخبراء والحراس والسماسرة والأساتذة والمعلمون، بخمس سنوات وفقاً للأحكام الخاصة بالتقادم."
+  },
+  {
+    "user_input": "When is an obligation extinguished because performance becomes impossible?",
+    "response": "An obligation is extinguished when performance becomes impossible for a cause beyond the debtor's control, subject to the applicable provisions governing impossibility of performance."
+  },
+  {
+    "user_input": "متى ينقضي الالتزام بسبب استحالة التنفيذ؟",
+    "response": "ينقضي الالتزام إذا أصبح تنفيذه مستحيلاً بسبب خارج عن إرادة المدين، مع مراعاة الأحكام القانونية الخاصة بذلك."
+  },
+  {
+    "user_input": "What events interrupt prescription through legal proceedings?",
+    "response": "Prescription is interrupted by legal proceedings, even when the action is brought before a court without jurisdiction, as well as by a summons, an attachment, an application by a creditor for admission of a claim in bankruptcy or distribution, or an act by which the creditor asserts the right during legal proceedings."
+  },
+  {
+    "user_input": "ما الحالات التي ينقطع فيها التقادم بسبب الإجراءات القضائية؟",
+    "response": "ينقطع التقادم بالمطالبة القضائية ولو رفعت الدعوى إلى محكمة غير مختصة، وبالتنبيه والحجز والطلب الذي يتقدم به الدائن لقبول حقه في تفليس أو في توزيع، وبأي عمل يقوم به الدائن للتمسك بحقه أثناء السير في إحدى الدعاوى."
+  },
+  {
+    "user_input": "Does filing a lawsuit interrupt prescription even if the court lacks jurisdiction?",
+    "response": "Yes. Prescription is interrupted by legal proceedings even if the action is instituted before a court without jurisdiction."
+  },
+  {
+    "user_input": "هل تنقطع مدة التقادم بإقامة الدعوى أمام محكمة غير مختصة؟",
+    "response": "نعم، ينقطع التقادم بالمطالبة القضائية ولو رفعت الدعوى إلى محكمة غير مختصة."
+  },
+  {
+    "user_input": "What effect does the debtor's acknowledgment of the creditor's right have on prescription?",
+    "response": "Prescription is interrupted when the debtor expressly or tacitly acknowledges the creditor's right. Leaving property pledged as security for the debt in the creditor's possession is treated as a tacit acknowledgment."
+  },
+  {
+    "user_input": "ما أثر إقرار المدين بحق الدائن على التقادم؟",
+    "response": "ينقطع التقادم إذا أقر المدين بحق الدائن إقراراً صريحاً أو ضمنياً، ويعتبر إقراراً ضمنياً أن يترك المدين تحت يد الدائن مالاً له مرهوناً رهناً حيازياً تأميناً لوفاء الدين."
+  },
+  {
+    "user_input": "When does a new limitation period begin after prescription is interrupted?",
+    "response": "When prescription is interrupted, a new period begins to run from the time the effect of the act causing the interruption has ceased, and its duration is generally the same as the former period."
+  },
+  {
+    "user_input": "متى يبدأ تقادم جديد بعد انقطاع التقادم؟",
+    "response": "إذا انقطع التقادم بدأ تقادم جديد يسري من وقت انتهاء الأثر المترتب على سبب الانقطاع، وتكون مدته هي مدة التقادم الأول، وفقاً للأحكام المقررة قانوناً."
+  },
+  {
+    "user_input": "Under what circumstances can a gift be revoked?",
+    "response": "A gift may be subject to revocation under the circumstances provided by law, while the law also specifies circumstances in which revocation is not permitted, including several situations relating to the donee, the gifted property, consideration, or charitable gifts."
+  },
+  {
+    "user_input": "في أي حالات يجوز الرجوع في الهبة؟",
+    "response": "يجوز الرجوع في الهبة في الحالات التي يقررها القانون، مع وجود حالات يمنع فيها الرجوع، ومنها حالات تتعلق بالموهوب له أو بالشيء الموهوب أو بوجود عوض أو إذا كانت الهبة صدقة أو عملاً من أعمال البر."
+  },
+  {
+    "user_input": "What is the effect of revoking a gift by mutual consent or by judgment?",
+    "response": "A gift revoked by mutual consent or by a judgment is deemed to be null and void. The donee is liable for restitution of fruits from the date of the agreement of revocation or from the date legal proceedings commence, and may claim necessary expenses and certain useful expenses as provided by law."
+  },
+  {
+    "user_input": "ما أثر الرجوع في الهبة بالتراضي أو بالتقاضي؟",
+    "response": "يترتب على الرجوع في الهبة بالتراضي أو بالتقاضي أن تعتبر الهبة كأن لم تكن. ولا يرد الموهوب له الثمرات إلا من وقت الاتفاق على الرجوع أو من وقت رفع الدعوى، وله الرجوع بالمصروفات الضرورية وبالمصروفات النافعة في الحدود التي يقررها القانون."
+  },
+  {
+    "user_input": "What happens if a contractor performs the work defectively or contrary to the agreement?",
+    "response": "The employer may formally summon the contractor to alter the manner of performance within a reasonable period. If the contractor fails to correct the method after that period, the employer may demand rescission of the contract or entrust the work to another contractor at the first contractor's expense."
+  },
+  {
+    "user_input": "ماذا يحق لصاحب العمل إذا نفذ المقاول العمل بطريقة معيبة أو مخالفة للعقد؟",
+    "response": "يجوز لرب العمل أن ينذر المقاول بأن يعدل من طريقة التنفيذ خلال أجل معقول يعينه له. فإذا انقضى الأجل دون أن يرجع المقاول إلى الطريقة الصحيحة، جاز لرب العمل أن يطلب فسخ العقد أو أن يعهد إلى مقاول آخر بإنجاز العمل على نفقة المقاول الأول."
+  },
+  {
+    "user_input": "Can the employer immediately seek rescission when the defective method of performance cannot be corrected?",
+    "response": "Yes. Immediate rescission may be demanded without granting a delay when rectification of the defective manner of performance is impossible."
+  },
+  {
+    "user_input": "متى يجوز طلب فسخ عقد المقاولة فوراً دون منح المقاول أجلاً؟",
+    "response": "يجوز طلب فسخ العقد في الحال دون حاجة إلى تعيين أجل إذا كان إصلاح العيب في طريقة التنفيذ مستحيلاً."
+  },
+  {
+    "user_input": "What is a mandate contract?",
+    "response": "A mandate is a contract whereby the mandatary undertakes to perform a juridical act on behalf of the mandator."
+  },
+  {
+    "user_input": "ما هو عقد الوكالة؟",
+    "response": "الوكالة عقد بمقتضاه يلتزم الوكيل بأن يقوم بعمل قانوني لحساب الموكل."
+  },
+  {
+    "user_input": "What form must a mandate generally take?",
+    "response": "The mandate must generally have the same form as the juridical act that is the subject of the mandate, unless the law provides otherwise."
+  },
+  {
+    "user_input": "ما الشكل الذي يجب أن تكون عليه الوكالة بوجه عام؟",
+    "response": "يجب أن تكون الوكالة في الشكل الذي يتطلبه القانون في العمل القانوني محل الوكالة، ما لم يوجد نص يقضي بغير ذلك."
+  },
+  {
+    "user_input": "What powers does a general mandate normally grant?",
+    "response": "A general mandate only gives the mandatary powers of management. Acts such as leases for no more than three years, acts of preservation and maintenance, recovery of rights, discharge of debts, and certain dispositions necessary for management are treated as acts of management."
+  },
+  {
+    "user_input": "ما السلطات التي تمنحها الوكالة العامة عادةً؟",
+    "response": "لا تمنح الوكالة العامة الوكيل إلا سلطات الإدارة. ويدخل في أعمال الإدارة الإيجار إذا لم تزد مدته على ثلاث سنوات، وأعمال الحفظ والصيانة واستيفاء الحقوق ووفاء الديون، وبعض أعمال التصرف التي تقتضيها الإدارة."
+  },
+  {
+    "user_input": "Does a general mandate authorize the sale of property?",
+    "response": "A general mandate does not by itself authorize acts that are not acts of management, such as a sale. A special mandate is required for a sale."
+  },
+  {
+    "user_input": "هل تكفي الوكالة العامة للبيع؟",
+    "response": "لا تكفي الوكالة العامة للبيع، لأن البيع من الأعمال التي تتطلب وكالة خاصة."
+  },
+  {
+    "user_input": "What acts specifically require a special mandate?",
+    "response": "A special mandate is required for acts that are not acts of management, particularly sale, mortgage, gifts, compromise, admission, arbitration, tendering an oath, and representation before the courts."
+  },
+  {
+    "user_input": "ما التصرفات التي تتطلب وكالة خاصة؟",
+    "response": "تلزم وكالة خاصة في كل عمل ليس من أعمال الإدارة، وبوجه خاص في البيع والرهن والتبرعات والصلح والإقرار والتحكيم وتوجيه اليمين والمرافعة أمام القضاء."
+  },
+  {
+    "user_input": "What are the limits of a special mandate?",
+    "response": "A special mandate gives the mandatary power to act only in the matters specified in it and in matters necessarily incidental to them according to their nature and prevailing custom."
+  },
+  {
+    "user_input": "ما حدود الوكالة الخاصة؟",
+    "response": "الوكالة الخاصة لا تجعل للوكيل صفة إلا في مباشرة الأمور المحددة فيها وما تقتضيه هذه الأمور من توابع ضرورية وفقاً لطبيعة كل أمر والعرف الجاري."
+  },
+  {
+    "user_input": "Must the mandatary stay within the limits of the mandate?",
+    "response": "Yes. The mandatary is bound to perform the mandate without exceeding the limits fixed therein."
+  },
+  {
+    "user_input": "هل يلتزم الوكيل بعدم تجاوز حدود الوكالة؟",
+    "response": "نعم، الوكيل ملزم بتنفيذ الوكالة دون أن يجاوز حدودها المرسومة."
+  },
+  {
+    "user_input": "What rules govern the designation of beneficiaries in life insurance?",
+    "response": "In life assurance, the insurance sum may be agreed to be paid to persons nominated in the policy or to persons to be nominated later by the assured. Insurance is also deemed to be made in favor of specified beneficiaries when the assured states that it is for a spouse, children or descendants, or heirs without naming them, subject to the rules provided by law."
+  },
+  {
+    "user_input": "ما القواعد المتعلقة بتعيين المستفيدين في التأمين على الحياة؟",
+    "response": "يجوز في التأمين على الحياة الاتفاق على دفع مبلغ التأمين إلى أشخاص معينين أو إلى أشخاص يعينهم المؤمن له فيما بعد. ويعتبر التأمين معقوداً لمصلحة مستفيدين معينين إذا ذكر المؤمن له في الوثيقة أن التأمين معقود لمصلحة زوجه أو أولاده أو فروعه أو لورثته دون ذكر أسمائهم، وفقاً للأحكام المقررة قانوناً."
+  },
+  {
+    "user_input": "What happens to heirs named as beneficiaries of a life insurance policy when they have renounced the inheritance?",
+    "response": "When life insurance is contracted in favor of heirs without naming them, those heirs are entitled to the insurance sum in proportion to their respective inheritance shares, and that right remains even if they renounce their inheritance."
+  },
+  {
+    "user_input": "إذا كان التأمين على الحياة لصالح الورثة دون ذكر أسمائهم، فهل يستحقون مبلغ التأمين إذا تنازلوا عن الإرث؟",
+    "response": "نعم، إذا كان التأمين لصالح الورثة دون ذكر أسمائهم كان لهم الحق في مبلغ التأمين كل بنسبة نصيبه في الميراث، ويثبت لهم هذا الحق ولو نزلوا عن الإرث."
+  },
+  {
+    "user_input": "What happens to public-domain property when its public utility allocation ends?",
+    "response": "It loses its public-domain status when its allocation for public utility ends, whether by law, decree, in fact, or because the purpose for which it was allocated comes to an end."
+  },
+  {
+    "user_input": "ماذا يحدث للمال العام عند انتهاء تخصيصه للمنفعة العامة؟",
+    "response": "يفقد المال صفته العامة بانتهاء تخصيصه للمنفعة العامة، سواء كان انتهاء التخصيص بمقتضى قانون أو مرسوم أو قرار من الوزير المختص أو بانتهاء الغرض الذي خصص من أجله."
+  },
+  {
+    "user_input": "A person is 21, mentally competent, and not under legal disability. Does the Civil Code regard that person as fully capable?",
+    "response": "Yes. A person who has attained twenty-one years, is in possession of their mental faculties, and has not been placed under legal disability has full legal capacity to exercise civil rights."
+  },
+  {
+    "user_input": "شخص بلغ الحادية والعشرين من عمره ويتمتع بقواه العقلية ولم يحجر عليه، فهل يكون كامل الأهلية؟",
+    "response": "نعم، يكون كامل الأهلية لمباشرة حقوقه المدنية إذا بلغ سن الرشد وهو متمتع بقواه العقلية ولم يحجر عليه."
+  },
+  {
+    "user_input": "A contractor continues using a defective method after receiving a reasonable deadline to correct it. What can the employer do?",
+    "response": "The employer may demand rescission of the contract or entrust the completion of the work to another contractor at the expense of the first contractor. If correction of the defective method is impossible, immediate rescission may be demanded without granting a delay."
+  },
+  {
+    "user_input": "إذا استمر المقاول في طريقة تنفيذ معيبة بعد انتهاء الأجل المعقول الممنوح له، فما حق رب العمل؟",
+    "response": "يجوز لرب العمل أن يطلب فسخ العقد أو أن يعهد إلى مقاول آخر بإنجاز العمل على نفقة المقاول الأول، ويجوز طلب الفسخ فوراً إذا كان إصلاح العيب في طريقة التنفيذ مستحيلاً."
+  },
+  {
+    "user_input": "If a debtor expressly acknowledges the creditor's right, does prescription continue uninterrupted?",
+    "response": "No. An express or tacit acknowledgment by the debtor of the creditor's right interrupts prescription."
+  },
+  {
+    "user_input": "إذا أقر المدين صراحة بحق الدائن، فهل يستمر التقادم دون انقطاع؟",
+    "response": "لا، ينقطع التقادم إذا أقر المدين بحق الدائن إقراراً صريحاً أو ضمنياً."
+  },
+  {
+    "user_input": "Can a general mandate cover the sale of perishable goods needed for management?",
+    "response": "A general mandate covers acts of management, and the sale of perishable crops, goods, or movables may be treated as an act of management when it is necessary for management. A sale outside such necessary management acts requires a special mandate."
+  },
+  {
+    "user_input": "هل يمكن أن تشمل الوكالة العامة بيع المحاصيل أو البضائع سريعة التلف؟",
+    "response": "تدخل في أعمال الإدارة أعمال التصرف التي تقتضيها الإدارة، ومنها بيع المحصول أو البضاعة أو المنقول الذي يسرع إليه التلف. أما البيع الذي لا يدخل في هذه الأعمال فيتطلب وكالة خاصة."
+  },
+  {
+    "user_input": "What is the effect of interruption of prescription on the length of the new period?",
+    "response": "After interruption, a new prescription period generally has the same duration as the former period and begins when the effect of the act causing interruption has ceased, subject to the specific rules provided by law."
+  },
+  {
+    "user_input": "ما مدة التقادم الجديد الذي يبدأ بعد انقطاع التقادم؟",
+    "response": "تكون مدة التقادم الجديد هي مدة التقادم الأول، ويبدأ من وقت انتهاء الأثر المترتب على سبب الانقطاع، وفقاً للأحكام القانونية الخاصة."
+  },
+  {
+    "user_input": "Can property belonging to the public domain be acquired through adverse possession or prescription?",
+    "response": "No. Property forming part of the public domain cannot be acquired by prescription."
+  },
+  {
+    "user_input": "هل يجوز اكتساب ملكية المال العام بالتقادم المكسب؟",
+    "response": "لا، الأموال التي تعد من الأموال العامة لا يجوز تملكها بالتقادم."
+  },
+  {
+    "user_input": "What is the minimum age below which a person is considered devoid of discretion?",
+    "response": "A person who has not attained seven years of age is considered devoid of discretion."
+  },
+  {
+    "user_input": "ما السن التي يعتبر من لم يبلغها فاقداً للتمييز؟",
+    "response": "كل من لم يبلغ السابعة يعتبر فاقداً للتمييز."
+  },
+  {
+    "user_input": "What is the difference between a general mandate and a special mandate?",
+    "response": "A general mandate normally grants powers of management, while a special mandate is required for acts outside management, particularly sale, mortgage, gifts, compromise, admission, arbitration, tendering an oath, and representation before courts. A special mandate also limits the mandatary to the specified matters and their necessary incidents."
+  },
+  {
+    "user_input": "ما الفرق بين الوكالة العامة والوكالة الخاصة؟",
+    "response": "الوكالة العامة تمنح الوكيل عادةً سلطات الإدارة، أما الوكالة الخاصة فتلزم للأعمال التي ليست من أعمال الإدارة، وبوجه خاص البيع والرهن والتبرعات والصلح والإقرار والتحكيم وتوجيه اليمين والمرافعة أمام القضاء، ولا تخول الوكيل إلا مباشرة الأمور المحددة فيها وتوابعها الضرورية."
+  },
+  {
+    "user_input": "What happens if prescription is interrupted by a lawsuit?",
+    "response": "The interruption prevents the previous prescription period from continuing, and a new prescription period begins after the effect of the act causing the interruption has ceased. The new period generally has the same duration as the former one."
+  },
+  {
+    "user_input": "ماذا يحدث للتقادم إذا انقطع بسبب رفع دعوى قضائية؟",
+    "response": "ينقطع التقادم بالمطالبة القضائية، وبعد انتهاء الأثر المترتب على سبب الانقطاع يبدأ تقادم جديد تكون مدته في الأصل هي مدة التقادم الأول."
+  },
+  {
+    "user_input": "What is considered a tacit acknowledgment of a debt for purposes of interrupting prescription?",
+    "response": "A debtor is deemed to have tacitly acknowledged the debt when the debtor leaves property pledged as a possessory security for the debt in the hands of the creditor."
+  },
+  {
+    "user_input": "ما الذي يعد إقراراً ضمنياً بالدين يؤدي إلى قطع التقادم؟",
+    "response": "يعتبر إقراراً ضمنياً أن يترك المدين تحت يد الدائن مالاً له مرهوناً رهناً حيازياً تأميناً لوفاء الدين."
+  },
+  {
+    "user_input": "Can the employer immediately terminate a works contract when the contractor's defective method cannot be corrected?",
+    "response": "Yes. Immediate rescission may be demanded without granting the contractor a delay when rectification of the defective manner of performance is impossible."
+  },
+  {
+    "user_input": "هل يجوز لرب العمل طلب فسخ عقد المقاولة فوراً إذا استحال إصلاح طريقة التنفيذ المعيبة؟",
+    "response": "نعم، يجوز طلب فسخ العقد في الحال دون حاجة إلى تعيين أجل إذا كان إصلاح ما في طريقة التنفيذ من عيب مستحيلاً."
+  },
+  {
+    "user_input": "What acts are treated as management under a general mandate?",
+    "response": "They include leases of no more than three years, acts of preservation and maintenance, recovery of rights, discharge of debts, and acts of disposition necessary for management, such as selling perishable crops, goods or movables and purchasing things necessary for preservation and exploitation of the subject of the mandate."
+  },
+  {
+    "user_input": "ما الأعمال التي تعد من أعمال الإدارة في الوكالة العامة؟",
+    "response": "يدخل فيها الإيجار إذا لم تزد مدته على ثلاث سنوات، وأعمال الحفظ والصيانة واستيفاء الحقوق ووفاء الديون، وكل عمل من أعمال التصرف تقتضيه الإدارة كبيع المحصول أو البضاعة أو المنقول الذي يسرع إليه التلف وشراء ما يستلزمه الشيء محل الوكالة من أدوات لحفظه واستغلاله."
+  },
+  {
+    "user_input": "What happens when the debtor acknowledges the creditor's right implicitly by pledging property to the creditor?",
+    "response": "That conduct is treated as a tacit acknowledgment of the debt and therefore interrupts prescription."
+  },
+  {
+    "user_input": "ماذا يترتب على ترك المدين مالاً مرهوناً رهناً حيازياً تحت يد الدائن؟",
+    "response": "يعتبر ذلك إقراراً ضمنياً بالدين، ويترتب عليه انقطاع التقادم."
+  }
+
+]
