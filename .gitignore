@@ -218,9 +218,4 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-<<<<<<< HEAD
-
 qdrant_storage
-
-=======
->>>>>>> 78445a5 (Initialize Git and DVC)

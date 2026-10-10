@@ -16,7 +16,11 @@ class Config(BaseSettings):
     INDENT: int = 2
 
     LLM_PROVIDER: str = "vllm"
+<<<<<<< HEAD
+    LLM_MODEL_NAME: str = ""
+=======
     LLM_MODEL_NAME: str = "" #NOT YET SET
+>>>>>>> 6b0cccc (V1-LLM)
     LLM_BASE_URL: str = "http://localhost:8000/v1"
     LLM_API_KEY: str = "EMPTY"
     LLM_TIMEOUT_SECONDS: int = 120
@@ -30,6 +34,11 @@ class Config(BaseSettings):
     LLM_MAX_CONTEXT_CHARS: int = 12000
     LLM_RETRY_COUNT: int = 2
     LLM_RETRY_BACKOFF_SECONDS: int = 2
+<<<<<<< HEAD
+    QDRANT_HOST: str = "localhost"
+    QDRANT_PORT: int = 6333
+=======
+>>>>>>> 6b0cccc (V1-LLM)
 
     model_config = SettingsConfigDict(
         env_file=".env",

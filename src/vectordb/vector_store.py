@@ -44,8 +44,10 @@ class QdrantVectorStore:
             "arabic" : models.VectorParams(size= arabic_embedding.model_size , distance=models.Distance.COSINE)
         }
         
-        #
-        self.sparse_vectors_config = {"bm25" : models.SparseVectorParams(modifier= models.Modifier.IDF)}
+        self.sparse_vectors_config = {
+            "bm25_english": models.SparseVectorParams(modifier=models.Modifier.IDF),
+            "bm25_arabic": models.SparseVectorParams(modifier=models.Modifier.IDF),
+        }
         
         self.arabic_embedding = arabic_embedding
         
@@ -89,8 +91,16 @@ class QdrantVectorStore:
             
             
             points = [models.PointStruct(id=response.count, 
-                                        vector={"english":en_vector , 
-                                                "arabic":ar_vector} ,
+                                        vector={"english":en_vector,
+                                                "arabic":ar_vector,
+                                                "bm25_english": models.Document(
+                                                    text=payload.text_en,
+                                                    model="Qdrant/bm25",
+                                                ),
+                                                "bm25_arabic": models.Document(
+                                                    text=payload.ar_text,
+                                                    model="Qdrant/bm25",
+                                                )},
                                         
                                         payload=payload.model_dump()
                                         
@@ -100,39 +110,3 @@ class QdrantVectorStore:
                 collection_name=collection_name, 
                 points=points
             )
-        
-    # async def search(self, collection_name:str , text:str,
-    #                 reterival_limit:int, score_threshold:float , reterival_renkad_limit:int,
-    #                 lang:Literal['arabic', 'english']):
-        
-    #     if text and lang == 'arabic':
-            
-    #         vector = self.arabic_embedding.encode(text=text)
-            
-    #     elif text and lang == 'english' :
-            
-    #         vector = self.english_embedding.encode(text = text)
-            
-    #     prefetch = [ models.Prefetch(
-    #                         query=vector,
-    #                         using=lang,
-    #                         limit=reterival_limit,
-    #                         score_threshold=score_threshold
-    #     ),
-    #                models.Prefetch(
-    #                    query=models.Document(text=text , model="Qdrant/bm25")
-    #                )
-    #     ]
-        
-    #     response = await self.client.query_points(
-    #         collection_name=collection_name, 
-    #         prefetch=prefetch,
-    #         query=models.FusionQuery(fusion=models.Fusion.RRF),
-    #         limit=reterival_renkad_limit,
-    #         with_payload=True
-    #     )
-        
-    #     return response.points
-        
-        
-                 
