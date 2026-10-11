@@ -14,7 +14,6 @@ dependencies = [
     "pymupdf>=1.28.2",
     "python-dotenv>=1.2.4",
     "qdrant-client>=1.19.1",
-    "sentence-transformers>=6.1.0",
     "tqdm>=4.70.1",
     "openai",
     "fastapi>=0.143.0",
@@ -24,6 +23,8 @@ dependencies = [
     "vertexai>=1.71.1",
     "pillow>=12.3.0",
     "matplotlib>=3.11.2",
+    "sentence-transformers[onnx]>=5.7.0",
+    "torch>=2.14.1",
 ]
 
 [project.scripts]
@@ -36,6 +37,14 @@ build-backend = "uv_build"
 [tool.uv.build-backend]
 module-root = "src"
 namespace = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu132" }
+
+[[tool.uv.index]]
+name = "pytorch-cu132"
+url = "https://download.pytorch.org/whl/cu132"
+
 
 [dependency-groups]
 dev = [
