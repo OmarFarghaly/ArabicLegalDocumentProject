@@ -53,6 +53,7 @@ dev = [
     "ruff>=0.16.10",
 ]
 
+
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]
 testpaths = ["tests"]
@@ -63,4 +64,6 @@ target-version = "py313"
 extend-exclude = ["experiments"]
 
 [tool.ruff.lint]
+select = ["E", "F", "I"]
+# Start small: E/F = real errors, I = import sorting
 select = ["E", "F", "I"]
