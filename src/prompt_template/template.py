@@ -37,8 +37,14 @@ OPTIONAL_FIELDS = [
 ]
 
 
+def as_dict(payload) -> dict:
+    """Accept a dict or a pydantic model (the API returns `Payload` objects)."""
+    return payload.model_dump() if hasattr(payload, "model_dump") else payload
+
+
 def format_article(payload: dict) -> str:
     """Turn one retrieved payload into a block the LLM can read and cite."""
+    payload = as_dict(payload)
     status = "REPEALED" if payload.get("is_repealed") else "in force"
     lines = [f'<article number="{payload["article_number"]}" status="{status}">']
     for label, key in OPTIONAL_FIELDS:

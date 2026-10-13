@@ -5,6 +5,7 @@ from src.prompt_template import (
     format_context,
 )
 from src.schemas.llm import LLMRequest
+from src.schemas.rag import Payload
 
 PAYLOAD = {
     "article_number": 147,
@@ -67,3 +68,9 @@ def test_build_request_fills_llm_request_fields():
 
 def test_no_payloads_gives_empty_context():
     assert build_llm_request("question", []).context_documents == []
+
+
+def test_accepts_pydantic_payload_objects():
+    payload = Payload(**{k: PAYLOAD[k] for k in Payload.model_fields})
+    request = build_llm_request("question", [payload])
+    assert 'number="147"' in request.context_documents[0]
