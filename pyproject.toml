@@ -65,5 +65,4 @@ extend-exclude = ["experiments"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]
-# Start small: E/F = real errors, I = import sorting
-select = ["E", "F", "I"]
+
