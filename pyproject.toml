@@ -53,7 +53,6 @@ dev = [
     "ruff>=0.16.10",
 ]
 
-
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]
 testpaths = ["tests"]
@@ -65,4 +64,3 @@ extend-exclude = ["experiments"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]
-
