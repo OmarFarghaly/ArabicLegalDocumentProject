@@ -6,7 +6,12 @@ class Config(BaseSettings):
     APP_NAME:str = Field(min_length=3, max_length=100)
     ENGLISH_EMBEDDING:str
     ARABIC_EMBEDDING:str
+    RERANKER_MODEL:str
     COLLECTION_NAME:str
+    
+    RETERIVAL_LIMIT:int
+    RETERIVAL_RRF_LIMIT:int
+    RETERIVAL_RERANKED_LIMIT:int   
     
     RAW_PDF: str
     ARTICLES_JSON: str
@@ -16,6 +21,7 @@ class Config(BaseSettings):
     INDENT: int = 2
 
     LLM_PROVIDER: str = "vllm"
+    LLM_MODEL_NAME: str = ""
     LLM_MODEL_NAME: str = "" #NOT YET SET
     LLM_BASE_URL: str = "http://localhost:8000/v1"
     LLM_API_KEY: str = "EMPTY"
@@ -30,6 +36,9 @@ class Config(BaseSettings):
     LLM_MAX_CONTEXT_CHARS: int = 12000
     LLM_RETRY_COUNT: int = 2
     LLM_RETRY_BACKOFF_SECONDS: int = 2
+    QDRANT_HOST: str = "localhost"
+    QDRANT_PORT: int = 6333
+
 
     model_config = SettingsConfigDict(
         env_file=".env",

@@ -14,5 +14,3 @@ class ExtractedRecord(BaseModel):
     is_repealed: bool
     source_page: int
     citation: str
-
-    

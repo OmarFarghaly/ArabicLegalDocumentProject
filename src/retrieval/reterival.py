@@ -27,10 +27,8 @@ class Reterival:
                     reterival_limit:int=20, score_threshold:float=0.5 , reterival_renkad_limit:int=10):
         
         if text.strip() and lang == 'arabic':
-            print("start embedding for text")
             
             vector = self.arabic_embedding.encode(text=text)
-            print("vector size ", len(vector))
             
         elif text.strip() and lang == 'english' :
             
@@ -44,7 +42,8 @@ class Reterival:
         ),
                    models.Prefetch(
                        query=models.Document(text=text , model="Qdrant/bm25"),
-                       using="bm25"
+                       using=f"bm25_{lang}",
+                       limit=reterival_limit
                    )
         ]
         
@@ -87,9 +86,7 @@ async def main():
         collection_name=config.COLLECTION_NAME ,text = text,lang=lang
     )
     
-    print(results)
-    print("==================================")
-    print(len(results)) 
+   
     
 if __name__ =='__main__':
     import asyncio

@@ -5,3 +5,29 @@ services:
       - 6333:6333
     volumes:
       - ./qdrant_storage:/qdrant/storage
+
+  vllm:
+    image: vllm/vllm-openai:latest
+    runtime: nvidia
+    gpus: all
+    ipc: host
+    ports:
+      - "8000:8000"
+    volumes:
+      - huggingface_cache:/root/.cache/huggingface
+    environment:
+      HF_TOKEN: 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
+    command:
+      - --model
+      - Qwen/Qwen3-0.6B
+      - --dtype
+      - bfloat16
+      - --gpu-memory-utilization
+      - "0.80"
+      - --max-num-seqs
+      - "32"
+      - --max-num-batched-tokens
+      - "4096"
+
+volumes:
+  huggingface_cache:
