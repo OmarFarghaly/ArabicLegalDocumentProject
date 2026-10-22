@@ -25,6 +25,8 @@ dependencies = [
     "matplotlib>=3.11.2",
     "sentence-transformers[onnx]>=5.7.0",
     "torch>=2.14.1",
+    "loguru>=0.7.3",
+    "uuid>=1.30",
 ]
 
 [project.scripts]

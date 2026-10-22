@@ -8,14 +8,17 @@ from src.embeddings import EmbeddingModel
 
 from src.config import Config
 
+from src.logger import Logger
+
 config = Config()
+logger = Logger().logger
 
 embedding_ar_name = config.ARABIC_EMBEDDING
 embedding_en_name = config.ENGLISH_EMBEDDING
-print(f"arabic embedding model name : {embedding_ar_name}")
+logger.info(f"arabic embedding model name : {embedding_ar_name}")
 arabic_embedding = EmbeddingModel(model_path= embedding_ar_name , 
                                   lang='arabic')
-print(f"english embedding model name : {embedding_en_name}")
+logger.info(f"english embedding model name : {embedding_en_name}")
 english_embedding = EmbeddingModel(model_path=embedding_en_name , 
                                    lang="english")
 
@@ -63,7 +66,7 @@ class QdrantVectorStore:
         )
         
         if  collection_exists:
-            print(f"collection {collection_name} already exists.")
+            logger.info(f"collection {collection_name} already exists.")
         
             self.client.delete_collection(collection_name=collection_name)
         
@@ -75,12 +78,14 @@ class QdrantVectorStore:
         
     def delete_collection(self, collection_name):
         
+        logger.info(f"Deleting collection: {collection_name}")
         return self.client.delete_collection(collection_name=collection_name)
     
     def create(self , collection_name:str, payload :Payload):
         
+        logger.info(f"Creating point in collection: {collection_name}")
         response = self.client.count(collection_name=collection_name)
-        
+        logger.info(f"Current count of points in collection {collection_name}: {response.count}")
         if  payload.ar_text.strip() and payload.text_en.strip():
             
             #raise ValueError("Both ar_text and text_en are required to create a point")
@@ -88,7 +93,7 @@ class QdrantVectorStore:
             ar_vector = self.arabic_embedding.encode(text=payload.ar_text)
             en_vector = self.english_embedding.encode(text=payload.text_en)
         
-            
+            logger.info(f"Creating point with ID: {response.count} in collection: {collection_name}")
             
             points = [models.PointStruct(id=response.count, 
                                         vector={"english":en_vector,
@@ -106,7 +111,9 @@ class QdrantVectorStore:
                                         
                                         )
             ]
+            logger.info(f"Upserting point with ID: {response.count} into collection: {collection_name}")
             self.client.upsert(
                 collection_name=collection_name, 
                 points=points
             )
+            logger.info(f"Point with ID: {response.count} upserted successfully into collection: {collection_name}")
