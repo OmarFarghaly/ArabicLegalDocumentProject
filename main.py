@@ -13,6 +13,8 @@ from src.logger import Logger
 from uuid import uuid4
 import time
 from datetime import datetime, timezone
+from src.cache import SemanticCache
+from redis.asyncio import Redis
 logger = Logger().logger
 
 
@@ -45,10 +47,24 @@ async def lifespan(app:FastAPI):
     logger.info("Initializing Reranker instance.")    
     app.state.reranker = Reranker(reranker_model=cross_encoder)
     logger.info("Initializing LLM instance.")
-    app.state.llm = get_llm(config)
+    app.state.llm = get_llm(config) 
+    if config.CACHE_ENABLED:
+        app.state.semantic_cache = SemanticCache(
+            Redis(host=config.REDIS_HOST,
+                  port=config.REDIS_PORT,
+                  socket_timeout=0.5,
+                  socket_connect_timeout=0.5),
+            ttl=config.CACHE_TTL_SECONDS,
+            threshold=config.SEMANTIC_CACHE_THRESHOLD,
+        )
+    else:
+        app.state.semantic_cache = None
     
     yield 
+
     logger.info("Shutting down application and closing resources.")
+    if app.state.semantic_cache is not None:
+            await app.state.semantic_cache.client.aclose()
     await app.state.qdrant_reterival.client.close()
     await app.state.llm.close()
     logger.info("Resources closed successfully.")
