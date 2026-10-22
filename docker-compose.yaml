@@ -28,6 +28,10 @@ services:
       - "32"
       - --max-num-batched-tokens
       - "4096"
-
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
 volumes:
   huggingface_cache:

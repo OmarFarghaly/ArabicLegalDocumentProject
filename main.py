@@ -7,6 +7,8 @@ from src.config import Config
 from src.retrieval import Reterival
 from src.reranker import Reranker
 from src.api.versions.v1 import rag
+from src.cache import RedisCache
+from redis.asyncio import Redis
 
 
 @asynccontextmanager
@@ -33,8 +35,22 @@ async def lifespan(app:FastAPI):
                                           trust_remote_code=True).bfloat16()
         
     app.state.reranker = Reranker(reranker_model=cross_encoder)
+    if config.CACHE_ENABLED:
+        app.state.cache = RedisCache(
+            Redis(host=config.REDIS_HOST,
+                  port=config.REDIS_PORT,
+                  decode_responses=True,
+                  socket_timeout=0.5,
+                  socket_connect_timeout=0.5),
+            default_ttl=config.CACHE_TTL_SECONDS,
+        )
+    else:
+        app.state.cache = None
+    
     
     yield 
+    if app.state.cache is not None:
+        await app.state.cache.client.aclose()
     
     await app.state.qdrant_reterival.client.close()
     del app.state.arabic_embedding
