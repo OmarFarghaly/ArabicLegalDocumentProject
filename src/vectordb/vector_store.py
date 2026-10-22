@@ -6,6 +6,8 @@ from typing import Literal, List, Dict , Optional
 
 from src.embeddings import EmbeddingModel
 
+from src.utils.arabic_text import normalize_arabic_for_sparse
+
 from src.config import Config
 
 config = Config()
@@ -85,6 +87,7 @@ class QdrantVectorStore:
             
             #raise ValueError("Both ar_text and text_en are required to create a point")
 
+            ar_sparse_text = normalize_arabic_for_sparse(payload.ar_text)
             ar_vector = self.arabic_embedding.encode(text=payload.ar_text)
             en_vector = self.english_embedding.encode(text=payload.text_en)
         
@@ -98,7 +101,7 @@ class QdrantVectorStore:
                                                     model="Qdrant/bm25",
                                                 ),
                                                 "bm25_arabic": models.Document(
-                                                    text=payload.ar_text,
+                                                    text=ar_sparse_text,
                                                     model="Qdrant/bm25",
                                                 )},
                                         

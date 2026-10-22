@@ -1,7 +1,7 @@
 from qdrant_client import AsyncQdrantClient, models
 from typing import Literal
 from langdetect import detect
-
+from src.utils.arabic_text import normalize_arabic_for_sparse
 from src.embeddings import EmbeddingModel
 
 from src.config import Config
@@ -33,6 +33,12 @@ class Reterival:
         elif text.strip() and lang == 'english' :
             
             vector = self.english_embedding.encode(text = text)
+
+        sparse_text = (
+            normalize_arabic_for_sparse(text)
+            if lang == "arabic"
+            else text
+        )
             
         prefetch = [ models.Prefetch(
                             query=vector,
@@ -41,7 +47,7 @@ class Reterival:
                             score_threshold=score_threshold
         ),
                    models.Prefetch(
-                       query=models.Document(text=text , model="Qdrant/bm25"),
+                       query=models.Document(text=sparse_text , model="Qdrant/bm25"),
                        using=f"bm25_{lang}",
                        limit=reterival_limit
                    )
