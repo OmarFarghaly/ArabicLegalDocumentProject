@@ -27,6 +27,7 @@ dependencies = [
     "torch>=2.14.1",
     "loguru>=0.7.3",
     "uuid>=1.30",
+    "redis>=8.1.0",
 ]
 
 [project.scripts]
@@ -46,10 +47,11 @@ torch = { index = "pytorch-cu132" }
 [[tool.uv.index]]
 name = "pytorch-cu132"
 url = "https://download.pytorch.org/whl/cu132"
-
+explicit = true
 
 [dependency-groups]
 dev = [
+    "fakeredis>=2.40.0",
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
     "ruff>=0.16.10",

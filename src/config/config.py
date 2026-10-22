@@ -44,6 +44,12 @@ class Config(BaseSettings):
     LLM_RETRY_BACKOFF_SECONDS: int = 2
     QDRANT_HOST: str = "localhost"
     QDRANT_PORT: int = 6333
+    # Cache Configuration
+    CACHE_ENABLED: bool = True
+    REDIS_HOST: str = "localhost"
+    REDIS_PORT: int = 6379
+    CACHE_TTL_SECONDS: int = 3600
+    SEMANTIC_CACHE_THRESHOLD: float = 0.12
 
 
     model_config = SettingsConfigDict(
