@@ -1,28 +1,34 @@
-# src/llm/providers/vllm_client.py
 
 import time
-from collections.abc import Generator
+from collections.abc import AsyncIterator
 
-from openai import OpenAI
+from openai import AsyncOpenAI
 
 from src.config import Config
 from src.llm.base import BaseLLM
 from src.schemas import LLMRequest, LLMResponse
 
+from src.logger import Logger
+
+logger = Logger().logger
+
 
 class VLLMClient(BaseLLM):
     def __init__(self, config: Config):
         self.config = config
+        try:
+            self.client = AsyncOpenAI(
+                    base_url=config.LLM_BASE_URL,
+                    api_key=config.LLM_API_KEY,
+                    timeout=config.LLM_TIMEOUT_SECONDS,
+                )
+        except Exception as e:
+            logger.error(f"Error initializing VLLM client: {e}")
+            raise
 
-        self.client = OpenAI(
-            base_url=config.LLM_BASE_URL,
-            api_key=config.LLM_API_KEY,
-            timeout=config.LLM_TIMEOUT_SECONDS,
-        )
-
-    def generate(self, request: LLMRequest) -> LLMResponse:
+    async def generate(self, request: LLMRequest) -> LLMResponse:
         start_time = time.perf_counter()
-
+        logger.info(f"Generating response for query: {request.query}")
         messages = []
 
         system_prompt = (
@@ -61,24 +67,24 @@ class VLLMClient(BaseLLM):
 
         max_tokens = (
             request.max_tokens
-            or self.config.LLM_MAX_TOKENS
+            if request.max_tokens is not None
+            else self.config.LLM_MAX_TOKENS
         )
         temperature = (
             request.temperature
-            or self.config.LLM_TEMPERATURE
+            if request.temperature is not None
+            else self.config.LLM_TEMPERATURE
         )
-        top_p = request.top_p or self.config.LLM_TOP_P
+        top_p = (
+            request.top_p if request.top_p is not None else self.config.LLM_TOP_P
+        )
         repetition_penalty = (
             request.repetition_penalty
-            or self.config.LLM_REPETITION_PENALTY
+            if request.repetition_penalty is not None
+            else self.config.LLM_REPETITION_PENALTY
         )
-
-        response = self.client.chat.completions.create(
-            #Create a chat completion
-            #using this model
-            #with these messages
-            #and these generation settings
-
+        logger.info(f"Sending request to VLLM with max_tokens={max_tokens}, temperature={temperature}, top_p={top_p}, repetition_penalty={repetition_penalty}")
+        response = await self.client.chat.completions.create(
             model=self.config.LLM_MODEL_NAME,
             messages=messages,
             max_tokens=max_tokens,
@@ -86,11 +92,15 @@ class VLLMClient(BaseLLM):
             top_p=top_p,
             extra_body={
                 "repetition_penalty": repetition_penalty,
+                "chat_template_kwargs": {
+                    "enable_thinking": self.config.LLM_ENABLE_THINKING,
+                },
             },
             stream=False,
         )
 
         answer = response.choices[0].message.content or ""
+        logger.info(f"Received response from VLLM: {answer[:100]}...")  # Log first 100 characters of the answer
 
         latency_ms = int(
             (time.perf_counter() - start_time) * 1000
@@ -103,6 +113,7 @@ class VLLMClient(BaseLLM):
                 "completion_tokens": response.usage.completion_tokens,
                 "total_tokens": response.usage.total_tokens,
             }
+        logger.info(f"Usage statistics for VLLM request: {usage}")
 
         return LLMResponse(
             answer=answer,
@@ -113,12 +124,12 @@ class VLLMClient(BaseLLM):
             usage=usage,
         )
 
-    def stream_generate(
+    async def stream_generate(
         self,
         request: LLMRequest,
-    ) -> Generator[str, None, None]:
+    ) -> AsyncIterator[str]:
+        logger.info(f"Generating stream response for query: {request.query}")
         messages = []
-
         system_prompt = (
             request.system_prompt
             or self.config.LLM_SYSTEM_PROMPT
@@ -150,19 +161,24 @@ class VLLMClient(BaseLLM):
 
         max_tokens = (
             request.max_tokens
-            or self.config.LLM_MAX_TOKENS
+            if request.max_tokens is not None
+            else self.config.LLM_MAX_TOKENS
         )
         temperature = (
             request.temperature
-            or self.config.LLM_TEMPERATURE
+            if request.temperature is not None
+            else self.config.LLM_TEMPERATURE
         )
-        top_p = request.top_p or self.config.LLM_TOP_P
+        top_p = (
+            request.top_p if request.top_p is not None else self.config.LLM_TOP_P
+        )
         repetition_penalty = (
             request.repetition_penalty
-            or self.config.LLM_REPETITION_PENALTY
+            if request.repetition_penalty is not None
+            else self.config.LLM_REPETITION_PENALTY
         )
-
-        stream = self.client.chat.completions.create(
+        logger.info(f"Sending streaming request to VLLM with max_tokens={max_tokens}, temperature={temperature}, top_p={top_p}, repetition_penalty={repetition_penalty}")
+        stream = await self.client.chat.completions.create(
             model=self.config.LLM_MODEL_NAME,
             messages=messages,
             max_tokens=max_tokens,
@@ -170,22 +186,30 @@ class VLLMClient(BaseLLM):
             top_p=top_p,
             extra_body={
                 "repetition_penalty": repetition_penalty,
+                "chat_template_kwargs": {
+                    "enable_thinking": self.config.LLM_ENABLE_THINKING,
+                },
             },
             stream=True,
         )
 
-        for chunk in stream:
+        async for chunk in stream:
             content = chunk.choices[0].delta.content
 
             if content:
                 yield content
+        logger.info("Streaming response from VLLM completed.")
 
-    def health_check(self) -> bool:
+    async def health_check(self) -> bool:
         try:
-            self.client.models.list()
+            logger.info("Performing health check for VLLM client")
+            await self.client.models.list()
             return True
         except Exception:
+            logger.error("Health check failed for VLLM client")
             return False
 
-    def close(self) -> None:
-        self.client.close()
+    async def close(self) -> None:
+        logger.info("Closing VLLM client")
+        await self.client.close()
+        logger.info("VLLM client closed successfully")
