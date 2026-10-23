@@ -16,18 +16,20 @@ services:
     volumes:
       - huggingface_cache:/root/.cache/huggingface
     environment:
-      HF_TOKEN: your_hf_token
+      HF_TOKEN: your_token
     command:
       - --model
-      - Qwen/Qwen3-0.6B
+      - Qwen/Qwen3.5-2B
       - --dtype
       - bfloat16
       - --gpu-memory-utilization
-      - "0.80"
+      - "0.85"
       - --max-num-seqs
-      - "32"
+      - "8"
       - --max-num-batched-tokens
-      - "4096"
+      - "1024"
+      - --max-model-len
+      - "8192"
 
 volumes:
   huggingface_cache:
