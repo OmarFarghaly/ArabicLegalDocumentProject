@@ -80,17 +80,18 @@ async def add_security_headers(request, call_next):
     request_id = str(uuid4())
     requested_at = datetime.now(timezone.utc).isoformat()
     logger.info(f"Processing request {request_id} for path: {request.url.path}")
-    logger.info(f"Request received at: {requested_at}")
+    logger.info(f"Request {request_id} received at: {requested_at}")
     start_time = time.perf_counter()
     response = await call_next(request)
     end_time = time.perf_counter()
     requested_dt = datetime.now(timezone.utc).isoformat()
-    logger.info(f"Request processed in {end_time - start_time:.2f} seconds")
-    logger.info(f"Request completed at: {requested_dt}")
+    logger.info(f"Request {request_id} processed in {end_time - start_time:.2f} seconds")
+    logger.info(f"Request {request_id} completed at: {requested_dt}")
     return response
+
 app.add_middleware(
     CORSMiddleware, 
-    allow_origins=["*"],  # Adjust this to your needs
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],    

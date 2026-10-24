@@ -6,11 +6,41 @@ from openai import AsyncOpenAI
 
 from src.config import Config
 from src.llm.base import BaseLLM
+from src.logger import Logger
 from src.schemas import LLMRequest, LLMResponse
 
-from src.logger import Logger
-
 logger = Logger().logger
+
+
+def _generation_options(config: Config, request: LLMRequest) -> dict:
+    return {
+        "max_tokens": (
+            request.max_tokens
+            if request.max_tokens is not None
+            else config.LLM_MAX_NEW_TOKENS
+        ),
+        "temperature": (
+            request.temperature
+            if request.temperature is not None
+            else config.LLM_TEMPERATURE
+        ),
+        "top_p": (
+            request.top_p if request.top_p is not None else config.LLM_TOP_P
+        ),
+        "presence_penalty": config.LLM_PRESENCE_PENALTY,
+        "extra_body": {
+            "top_k": config.LLM_TOP_K,
+            "min_p": config.LLM_MIN_P,
+            "repetition_penalty": (
+                request.repetition_penalty
+                if request.repetition_penalty is not None
+                else config.LLM_REPETITION_PENALTY
+            ),
+            "chat_template_kwargs": {
+                "enable_thinking": config.LLM_ENABLE_THINKING,
+            },
+        },
+    }
 
 
 class VLLMClient(BaseLLM):
@@ -65,42 +95,20 @@ class VLLMClient(BaseLLM):
             "content": user_content,
         })
 
-        max_tokens = (
-            request.max_tokens
-            if request.max_tokens is not None
-            else self.config.LLM_MAX_TOKENS
+        generation_options = _generation_options(self.config, request)
+        logger.info(
+            "Sending request to VLLM with generation options: "
+            f"{generation_options}"
         )
-        temperature = (
-            request.temperature
-            if request.temperature is not None
-            else self.config.LLM_TEMPERATURE
-        )
-        top_p = (
-            request.top_p if request.top_p is not None else self.config.LLM_TOP_P
-        )
-        repetition_penalty = (
-            request.repetition_penalty
-            if request.repetition_penalty is not None
-            else self.config.LLM_REPETITION_PENALTY
-        )
-        logger.info(f"Sending request to VLLM with max_tokens={max_tokens}, temperature={temperature}, top_p={top_p}, repetition_penalty={repetition_penalty}")
         response = await self.client.chat.completions.create(
             model=self.config.LLM_MODEL_NAME,
             messages=messages,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            extra_body={
-                "repetition_penalty": repetition_penalty,
-                "chat_template_kwargs": {
-                    "enable_thinking": self.config.LLM_ENABLE_THINKING,
-                },
-            },
+            **generation_options,
             stream=False,
         )
 
         answer = response.choices[0].message.content or ""
-        logger.info(f"Received response from VLLM: {answer[:100]}...")  # Log first 100 characters of the answer
+        logger.info(f"Received response from VLLM: {answer[:100]}...")
 
         latency_ms = int(
             (time.perf_counter() - start_time) * 1000
@@ -159,37 +167,15 @@ class VLLMClient(BaseLLM):
 
         user_content += f"Current question:\n{request.query}"
 
-        max_tokens = (
-            request.max_tokens
-            if request.max_tokens is not None
-            else self.config.LLM_MAX_TOKENS
+        generation_options = _generation_options(self.config, request)
+        logger.info(
+            "Sending streaming request to VLLM with generation options: "
+            f"{generation_options}"
         )
-        temperature = (
-            request.temperature
-            if request.temperature is not None
-            else self.config.LLM_TEMPERATURE
-        )
-        top_p = (
-            request.top_p if request.top_p is not None else self.config.LLM_TOP_P
-        )
-        repetition_penalty = (
-            request.repetition_penalty
-            if request.repetition_penalty is not None
-            else self.config.LLM_REPETITION_PENALTY
-        )
-        logger.info(f"Sending streaming request to VLLM with max_tokens={max_tokens}, temperature={temperature}, top_p={top_p}, repetition_penalty={repetition_penalty}")
         stream = await self.client.chat.completions.create(
             model=self.config.LLM_MODEL_NAME,
             messages=messages,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            extra_body={
-                "repetition_penalty": repetition_penalty,
-                "chat_template_kwargs": {
-                    "enable_thinking": self.config.LLM_ENABLE_THINKING,
-                },
-            },
+            **generation_options,
             stream=True,
         )
 
