@@ -72,9 +72,3 @@ async def answer(input_question:InputRequest, request:Request):
     logger.info(f"Generated answer for question: {input_question.question}")
     logger.info(f"Answer: {response.answer}")
     return response
-    
-    
-    
-    
-
-

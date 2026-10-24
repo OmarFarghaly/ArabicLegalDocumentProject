@@ -16,7 +16,7 @@ services:
     volumes:
       - huggingface_cache:/root/.cache/huggingface
     environment:
-      HF_TOKEN: your_token
+      HF_TOKEN: your_hf_token
     command:
       - --model
       - Qwen/Qwen3.5-2B
@@ -30,6 +30,7 @@ services:
       - "1024"
       - --max-model-len
       - "8192"
+      - --enable-prefix-caching
 
 volumes:
   huggingface_cache:

@@ -27,10 +27,14 @@ class Config(BaseSettings):
     LLM_BASE_URL: str = "http://localhost:8000/v1"
     LLM_API_KEY: str = "EMPTY"
     LLM_TIMEOUT_SECONDS: int = 120
-    LLM_MAX_TOKENS: int = 2048
-    LLM_TEMPERATURE: float = 0.2
-    LLM_TOP_P: float = 0.95
-    LLM_REPETITION_PENALTY: float = 1.05
+    LLM_MAX_NEW_TOKENS: int = 512
+    LLM_TEMPERATURE: float = 1.0
+    LLM_TOP_P: float = 1.0
+    LLM_TOP_K: int = 20
+    LLM_MIN_P: float = 0.0
+    LLM_PRESENCE_PENALTY: float = 2.0
+
+    LLM_REPETITION_PENALTY: float = 1.0
     LLM_ENABLE_THINKING: bool = False
     LLM_STREAMING_ENABLED: bool = True
     LLM_SYSTEM_PROMPT: str = (
