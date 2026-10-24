@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from sentence_transformers import CrossEncoder
 from src.embeddings import EmbeddingModel
 from src.config import Config
-from src.retrieval import Reterival
+from src.retrieval import Retrieval
 from src.reranker import Reranker
 from src.api.versions.v1 import rag
 from src.llm.factory import get_llm
@@ -30,8 +30,8 @@ async def lifespan(app:FastAPI):
     
     app.state.english_embedding = EmbeddingModel(model_path=config.ENGLISH_EMBEDDING,
                                                  lang="english")
-    logger.info("Initializing Qdrant Reterival instance.")
-    app.state.qdrant_reterival =  Reterival(arabic_embedding=app.state.arabic_embedding,
+    logger.info("Initializing Qdrant Retrieval instance.")
+    app.state.qdrant_retrieval =  Retrieval(arabic_embedding=app.state.arabic_embedding,
                                             english_embedding=app.state.english_embedding,
                                             host=config.QDRANT_HOST,
                                             port=config.QDRANT_PORT)
@@ -64,8 +64,8 @@ async def lifespan(app:FastAPI):
 
     logger.info("Shutting down application and closing resources.")
     if app.state.semantic_cache is not None:
-            await app.state.semantic_cache.client.aclose()
-    await app.state.qdrant_reterival.client.close()
+        await app.state.semantic_cache.client.aclose()
+    await app.state.qdrant_retrieval.client.close()
     await app.state.llm.close()
     logger.info("Resources closed successfully.")
     del app.state.arabic_embedding

@@ -1,1 +1,1 @@
-from .reterival import Reterival
+from .retrieval import Retrieval
