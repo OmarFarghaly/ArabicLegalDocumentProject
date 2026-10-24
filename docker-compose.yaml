@@ -16,20 +16,29 @@ services:
     volumes:
       - huggingface_cache:/root/.cache/huggingface
     environment:
-      HF_TOKEN: your_token
+      HF_TOKEN: your_hf_token
     command:
       - --model
-      - Qwen/Qwen3.5-2B
+      - Qwen/Qwen3-0.6B
       - --dtype
       - bfloat16
       - --gpu-memory-utilization
-      - "0.85"
+      - "0.80"
       - --max-num-seqs
-      - "8"
+      - "32"
       - --max-num-batched-tokens
-      - "1024"
-      - --max-model-len
-      - "8192"
+      - "4096"
+
+  redis:
+    image: redis/redis-stack-server:latest
+    ports:
+      - "6379:6379"
+    environment:
+      # Do not use `command:` with redis-stack, it disables the modules.
+      REDIS_ARGS: "--maxmemory 256mb --maxmemory-policy volatile-lru --appendonly yes"
+    volumes:
+      - redis_data:/data
 
 volumes:
   huggingface_cache:
+  redis_data:

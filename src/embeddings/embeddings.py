@@ -12,7 +12,7 @@ class EmbeddingModel:
         
         self.model_path = model_path
         logger.info(f"Initializing EmbeddingModel with model_path: {self.model_path} and lang: {lang}")
-        self.encoder = SentenceTransformer(self.model_path)
+        self.encoder = SentenceTransformer(self.model_path,trust_remote_code=True)
         
         self.lang = lang
         

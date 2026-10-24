@@ -13,6 +13,8 @@ from src.logger import Logger
 from uuid import uuid4
 import time
 from datetime import datetime, timezone
+from src.cache import SemanticCache
+from redis.asyncio import Redis
 logger = Logger().logger
 
 
@@ -45,10 +47,24 @@ async def lifespan(app:FastAPI):
     logger.info("Initializing Reranker instance.")    
     app.state.reranker = Reranker(reranker_model=cross_encoder)
     logger.info("Initializing LLM instance.")
-    app.state.llm = get_llm(config)
+    app.state.llm = get_llm(config) 
+    if config.CACHE_ENABLED:
+        app.state.semantic_cache = SemanticCache(
+            Redis(host=config.REDIS_HOST,
+                  port=config.REDIS_PORT,
+                  socket_timeout=0.5,
+                  socket_connect_timeout=0.5),
+            ttl=config.CACHE_TTL_SECONDS,
+            threshold=config.SEMANTIC_CACHE_THRESHOLD,
+        )
+    else:
+        app.state.semantic_cache = None
     
     yield 
+
     logger.info("Shutting down application and closing resources.")
+    if app.state.semantic_cache is not None:
+        await app.state.semantic_cache.client.aclose()
     await app.state.qdrant_retrieval.client.close()
     await app.state.llm.close()
     logger.info("Resources closed successfully.")
@@ -64,17 +80,18 @@ async def add_security_headers(request, call_next):
     request_id = str(uuid4())
     requested_at = datetime.now(timezone.utc).isoformat()
     logger.info(f"Processing request {request_id} for path: {request.url.path}")
-    logger.info(f"Request received at: {requested_at}")
+    logger.info(f"Request {request_id} received at: {requested_at}")
     start_time = time.perf_counter()
     response = await call_next(request)
     end_time = time.perf_counter()
     requested_dt = datetime.now(timezone.utc).isoformat()
-    logger.info(f"Request processed in {end_time - start_time:.2f} seconds")
-    logger.info(f"Request completed at: {requested_dt}")
+    logger.info(f"Request {request_id} processed in {end_time - start_time:.2f} seconds")
+    logger.info(f"Request {request_id} completed at: {requested_dt}")
     return response
+
 app.add_middleware(
     CORSMiddleware, 
-    allow_origins=["*"],  # Adjust this to your needs
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],    

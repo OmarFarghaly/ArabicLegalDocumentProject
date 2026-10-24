@@ -118,6 +118,8 @@ def test_build_request_fills_llm_request_fields():
         in prompt
     )
     assert "Never cite a retrieval label" in prompt
+    assert "Preserve every explicit fact" in prompt
+    assert "check each factual claim against the cited article" in prompt
     assert "[Document 1]" in prompt
     assert "include every metadata field available" in prompt
     assert "even when only one" in prompt
