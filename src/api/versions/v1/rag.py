@@ -11,25 +11,32 @@ logger = Logger().logger
 
 rag_router = APIRouter(prefix="/api/v1/rag")
 
-lang_mapping = {"ar":"arabic" , "en":"english"}
+lang_mapping = {"ar": "arabic", "en": "english"}
 
 config = Config()
 
 
 def get_payload_from_points(points):
-    
+
     if points:
         return [Payload(**point.payload) for point in points]
     return None
 
+
+# embeds the question with the same model used for retrieval
+def embed_question(request: Request, text: str, lang: str):
+    embedding = getattr(request.app.state, f"{lang}_embedding")
+    return embedding.embed_query(text)  # change to the real method name
+
+
 @rag_router.post("/answer", response_model=LLMResponse)
-async def answer(input_question:InputRequest, request:Request):
+async def answer(input_question: InputRequest, request: Request):
 
     qdrant_reterival = request.app.state.qdrant_reterival
     logger.info("Retrieved QdrantReterival instance")
     reranker = request.app.state.reranker
-    
-    lang = detect(text = input_question.question)
+
+    lang = detect(text=input_question.question)
     try:
         lang = lang_mapping[lang]
     except KeyError:
@@ -38,17 +45,30 @@ async def answer(input_question:InputRequest, request:Request):
 
     logger.info(f"Detected language: {lang}")
     logger.info(f"Input question: {input_question.question}")
+
+    # semantic cache lookup, before any retrieval work
+    semantic_cache = request.app.state.semantic_cache
+    vec = None
+    if semantic_cache is not None:
+        vec = embed_question(request, input_question.question, lang)
+        cached = await semantic_cache.get(lang, vec)
+        if cached is not None:
+            try:
+                return LLMResponse.model_validate_json(cached)
+            except ValueError:
+                logger.warning("Invalid cached entry, ignoring it")
+
     points = await qdrant_reterival.search(
-        collection_name=config.COLLECTION_NAME ,
-        text = input_question.question,
+        collection_name=config.COLLECTION_NAME,
+        text=input_question.question,
         lang=lang,
-        reterival_limit = config.RETERIVAL_LIMIT,
-        reterival_renkad_limit = config.RETERIVAL_RRF_LIMIT
+        reterival_limit=config.RETERIVAL_LIMIT,
+        reterival_renkad_limit=config.RETERIVAL_RRF_LIMIT,
     )
     logger.info(f"Retrieved {len(points)} points from Qdrant for the query: {input_question.question}")
-    
+
     payloads = get_payload_from_points(points)
-    
+
     reanked_payloads = reranker.rerank(
         query=input_question.question,
         payloads=payloads,
@@ -71,4 +91,14 @@ async def answer(input_question:InputRequest, request:Request):
     )
     logger.info(f"Generated answer for question: {input_question.question}")
     logger.info(f"Answer: {response.answer}")
+
+    #  store the final response (after citations) in the cache
+    if semantic_cache is not None:
+        await semantic_cache.set(
+            lang,
+            input_question.question,
+            vec,
+            response.model_dump_json(),
+        )
+
     return response
