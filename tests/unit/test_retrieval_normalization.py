@@ -1,7 +1,7 @@
 import asyncio
 from types import SimpleNamespace
 
-from src.retrieval.reterival import Reterival
+from retrieval.retrieval import Retrieval
 
 
 class StubEmbedding:
@@ -24,7 +24,7 @@ class StubClient:
 
 def test_arabic_query_normalizes_bm25_but_not_dense_embedding():
     arabic_embedding = StubEmbedding()
-    retriever = Reterival(
+    retriever = Retrieval(
         arabic_embedding=arabic_embedding,
         english_embedding=StubEmbedding(),
     )

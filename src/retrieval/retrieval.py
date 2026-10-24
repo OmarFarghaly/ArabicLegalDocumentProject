@@ -1,16 +1,15 @@
-from qdrant_client import AsyncQdrantClient, models
 from typing import Literal
-from langdetect import detect
 
-from src.config import Config
+from qdrant_client import AsyncQdrantClient, models
+
 from src.embeddings import EmbeddingModel
 from src.logger import Logger
+from src.utils.arabic_text import normalize_arabic_for_sparse
 
 logger = Logger().logger
-config = Config()
 
 
-class Reterival:
+class Retrieval:
     
     def __init__(self, arabic_embedding: EmbeddingModel, english_embedding: EmbeddingModel,
                  host = 'localhost', port=6333 ):
@@ -22,8 +21,18 @@ class Reterival:
         self.client = AsyncQdrantClient(host=self.host , 
                                         port=self.port)
         logger.info(f"Initialized Reterival with host: {self.host}, port: {self.port}")
-        logger.info(f"Arabic embedding model: {self.arabic_embedding.model_path}, size: {self.arabic_embedding.model_size}")
-        logger.info(f"English embedding model: {self.english_embedding.model_path}, size: {self.english_embedding.model_size}")
+        arabic_model_path = getattr(self.arabic_embedding, "model_path", "unknown")
+        arabic_model_size = getattr(self.arabic_embedding, "model_size", "unknown")
+        logger.info(
+            f"Arabic embedding model: {arabic_model_path}, "
+            f"size: {arabic_model_size}"
+        )
+        english_model_path = getattr(self.english_embedding, "model_path", "unknown")
+        english_model_size = getattr(self.english_embedding, "model_size", "unknown")
+        logger.info(
+            f"English embedding model: {english_model_path}, "
+            f"size: {english_model_size}"
+        )
             
     async def search(self, collection_name:str , text:str,
                      lang:Literal['arabic', 'english'],
@@ -48,6 +57,9 @@ class Reterival:
         else:
             logger.error("Empty text provided for search")
             raise ValueError("Empty text provided for search")
+        sparse_text = (
+            normalize_arabic_for_sparse(text) if lang == "arabic" else text
+        )
         prefetch = [ models.Prefetch( # semantic meaning dense 
                             query=vector,
                             using=lang,
@@ -55,7 +67,7 @@ class Reterival:
                             score_threshold=score_threshold
         ), 
                    models.Prefetch( 
-                       query=models.Document(text=text , model="Qdrant/bm25"),
+                       query=models.Document(text=sparse_text, model="Qdrant/bm25"),
                        using=f"bm25_{lang}",
                        limit=reterival_limit
                    )
