@@ -49,7 +49,7 @@ async def answer(input_question: InputRequest, request: Request):
     # semantic cache lookup, before any retrieval work
     semantic_cache = request.app.state.semantic_cache
     vec = None
-    if semantic_cache is not None:
+    if semantic_cache is not None and not input_question.chat_history:
         vec = embed_question(request, input_question.question, lang)
         cached = await semantic_cache.get(lang, vec)
         if cached is not None:
@@ -80,6 +80,7 @@ async def answer(input_question: InputRequest, request: Request):
         query=input_question.question,
         payloads=reanked_payloads,
         language=lang,
+        chat_history=input_question.chat_history,
         max_docs=config.RETRIEVAL_RERANKED_LIMIT,
         max_chars=24000,
     )
@@ -93,7 +94,7 @@ async def answer(input_question: InputRequest, request: Request):
     logger.info(f"Answer: {response.answer}")
 
     #  store the final response (after citations) in the cache
-    if semantic_cache is not None:
+    if semantic_cache is not None and not input_question.chat_history:
         await semantic_cache.set(
             lang,
             input_question.question,
