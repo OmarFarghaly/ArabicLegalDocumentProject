@@ -20,7 +20,7 @@ class Retrieval:
         self.arabic_embedding = arabic_embedding
         self.client = AsyncQdrantClient(host=self.host , 
                                         port=self.port)
-        logger.info(f"Initialized Reterival with host: {self.host}, port: {self.port}")
+        logger.info(f"Initialized Retrieval with host: {self.host}, port: {self.port}")
         arabic_model_path = getattr(self.arabic_embedding, "model_path", "unknown")
         arabic_model_size = getattr(self.arabic_embedding, "model_size", "unknown")
         logger.info(
@@ -36,7 +36,7 @@ class Retrieval:
             
     async def search(self, collection_name:str , text:str,
                      lang:Literal['arabic', 'english'],
-                    reterival_limit:int=20, score_threshold:float=0.5 , reterival_renkad_limit:int=10):
+                    retrieval_limit:int=20, score_threshold:float=0.5 , retrieval_reranked_limit:int=10):
         logger.info(f"Searching in collection: {collection_name} for text: {text} in language: {lang}")
         if text.strip() and lang == 'arabic':
             logger.info("Encoding text using Arabic embedding model")
@@ -63,13 +63,13 @@ class Retrieval:
         prefetch = [ models.Prefetch( # semantic meaning dense 
                             query=vector,
                             using=lang,
-                            limit=reterival_limit,
+                            limit=retrieval_limit,
                             score_threshold=score_threshold
         ), 
                    models.Prefetch( 
                        query=models.Document(text=sparse_text, model="Qdrant/bm25"),
                        using=f"bm25_{lang}",
-                       limit=reterival_limit
+                       limit=retrieval_limit
                    )
         ]
         #logger.info(f"Prefetch configuration: {prefetch}")
@@ -78,7 +78,7 @@ class Retrieval:
                 collection_name=collection_name, 
                 prefetch=prefetch,
                 query=models.FusionQuery(fusion=models.Fusion.RRF),
-                limit=reterival_renkad_limit,
+                limit=retrieval_reranked_limit,
                 with_payload=True
             )
             logger.info(f"Search completed. Number of points retrieved: {len(response.points)}")
@@ -107,7 +107,7 @@ class Retrieval:
 #     english_embedding = EmbeddingModel(model_path=embedding_en_name , 
 #                                     lang="english") 
     
-#     search_clinet = Reterival(arabic_embedding=arabic_embedding, english_embedding=english_embedding)
+#     search_clinet = Retrieval(arabic_embedding=arabic_embedding, english_embedding=english_embedding)
 #     text = "ما هي الأركان الأساسية اللازمة لانعقاد العقد وفقًا للقانون المدني المصري؟"
 #     lang = detect(text = text)
     

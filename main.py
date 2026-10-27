@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-import os
 import torch
 from contextlib import asynccontextmanager
 from sentence_transformers import CrossEncoder
@@ -37,7 +36,7 @@ async def lifespan(app:FastAPI):
                                             english_embedding=app.state.english_embedding,
                                             host=config.QDRANT_HOST,
                                             port=config.QDRANT_PORT)
-    hf_token = os.getenv("HF_TOKEN") or None
+    hf_token = config.HF_TOKEN or None
     if torch.cuda.is_available():
         logger.info("CUDA is available. Initializing CrossEncoder on GPU.")
         logger.info(f"Loading reranker model: {config.RERANKER_MODEL}")
@@ -93,7 +92,7 @@ async def health(request: Request):
     config = request.app.state.config
 
     try:
-        point_count = await request.app.state.qdrant_reterival.client.count(
+        point_count = await request.app.state.qdrant_retrieval.client.count(
             collection_name=config.COLLECTION_NAME,
             exact=False,
         )

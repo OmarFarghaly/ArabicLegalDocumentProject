@@ -20,7 +20,7 @@ def make_request(point_count: int = 1, redis_enabled: bool = True):
     llm = SimpleNamespace(health_check=AsyncMock(return_value=True))
     state = SimpleNamespace(
         config=SimpleNamespace(COLLECTION_NAME="test_collection"),
-        qdrant_reterival=SimpleNamespace(client=qdrant_client),
+        qdrant_retrieval=SimpleNamespace(client=qdrant_client),
         semantic_cache=semantic_cache,
         llm=llm,
     )
@@ -36,7 +36,7 @@ def test_health_reports_healthy_dependencies():
         "status": "healthy",
         "checks": {"qdrant": "healthy", "redis": "healthy", "vllm": "healthy"},
     }
-    state.qdrant_reterival.client.count.assert_awaited_once_with(
+    state.qdrant_retrieval.client.count.assert_awaited_once_with(
         collection_name="test_collection",
         exact=False,
     )
