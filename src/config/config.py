@@ -10,9 +10,9 @@ class Config(BaseSettings):
     RERANKER_MODEL:str
     COLLECTION_NAME:str
     
-    RETERIVAL_LIMIT:int
-    RETERIVAL_RRF_LIMIT:int
-    RETERIVAL_RERANKED_LIMIT:int   
+    RETRIEVAL_LIMIT:int
+    RETRIEVAL_RRF_LIMIT:int
+    RETRIEVAL_RERANKED_LIMIT:int   
     
     RAW_PDF: str
     ARTICLES_JSON: str
@@ -35,6 +35,7 @@ class Config(BaseSettings):
     LLM_PRESENCE_PENALTY: float = 2.0
 
     LLM_REPETITION_PENALTY: float = 1.0
+    HF_TOKEN: str | None = None
     LLM_ENABLE_THINKING: bool = False
     LLM_STREAMING_ENABLED: bool = True
     LLM_SYSTEM_PROMPT: str = (

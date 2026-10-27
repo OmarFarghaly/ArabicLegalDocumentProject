@@ -32,8 +32,8 @@ def embed_question(request: Request, text: str, lang: str):
 @rag_router.post("/answer", response_model=LLMResponse)
 async def answer(input_question: InputRequest, request: Request):
 
-    qdrant_reterival = request.app.state.qdrant_reterival
-    logger.info("Retrieved QdrantReterival instance")
+    qdrant_retrieval = request.app.state.qdrant_retrieval
+    logger.info("Retrieved QdrantRetrieval instance")
     reranker = request.app.state.reranker
 
     lang = detect(text=input_question.question)
@@ -58,12 +58,12 @@ async def answer(input_question: InputRequest, request: Request):
             except ValueError:
                 logger.warning("Invalid cached entry, ignoring it")
 
-    points = await qdrant_reterival.search(
+    points = await qdrant_retrieval.search(
         collection_name=config.COLLECTION_NAME,
         text=input_question.question,
         lang=lang,
-        reterival_limit=config.RETERIVAL_LIMIT,
-        reterival_renkad_limit=config.RETERIVAL_RRF_LIMIT,
+        retrieval_limit=config.RETRIEVAL_LIMIT,
+        retrieval_reranked_limit=config.RETRIEVAL_RRF_LIMIT,
     )
     logger.info(f"Retrieved {len(points)} points from Qdrant for the query: {input_question.question}")
 
@@ -73,14 +73,14 @@ async def answer(input_question: InputRequest, request: Request):
         query=input_question.question,
         payloads=payloads,
         lang=lang,
-        limit=config.RETERIVAL_RERANKED_LIMIT,
+        limit=config.RETRIEVAL_RERANKED_LIMIT,
     )
 
     llm_request = build_llm_request(
         query=input_question.question,
         payloads=reanked_payloads,
         language=lang,
-        max_docs=config.RETERIVAL_RERANKED_LIMIT,
+        max_docs=config.RETRIEVAL_RERANKED_LIMIT,
         max_chars=24000,
     )
     response = await request.app.state.llm.generate(llm_request)
