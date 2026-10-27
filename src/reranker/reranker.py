@@ -19,7 +19,7 @@ class Reranker:
             
             pairs = [(query , doc) for doc in docs]    
             
-            scores = self.reranker_model.predict(pairs)
+            scores = self.reranker_model.predict(pairs, batch_size=8, device ="cuda" if self.reranker_model.device.type == "cuda" else "cpu")
             
             sorted_docs = sorted(list(zip(payloads, scores)), key=lambda x:x[1], reverse=True)
             

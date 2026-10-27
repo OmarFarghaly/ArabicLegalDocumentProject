@@ -9,8 +9,16 @@ logger = Logger().logger
 
 class IndexingStore:
     
-    def __init__(self,  data_path:str, vector_store = QdrantVectorStore()):
-        
+    def __init__(
+        self,
+        data_path: str,
+        vector_store: QdrantVectorStore | None = None,
+    ):
+        if vector_store is None:
+            vector_store = QdrantVectorStore(
+                host=config.QDRANT_HOST,
+                port=config.QDRANT_PORT,
+            )
         self.vector_store = vector_store
         
         self.data_path = data_path
@@ -35,6 +43,7 @@ class IndexingStore:
         
         #add data 
         logger.info("Adding data to collection: {}".format(collection_name))
+        failed_records = 0
         try:
             for record in tqdm.tqdm(self.read_data()):
                 try:
@@ -53,10 +62,17 @@ class IndexingStore:
                     
                     logger.info("Record added successfully to collection: {}".format(collection_name))
                 except Exception as e:
+                    failed_records += 1
                     logger.error("Error adding record to collection: {}".format(collection_name))
                     logger.error(e)
                     continue
                 
+            if failed_records:
+                logger.error(
+                    f"Index build failed for {failed_records} record(s)"
+                )
+                return False
+
             logger.info("Data added successfully to collection: {}".format(collection_name))
         except Exception as e:
             logger.error("Error adding data to collection: {}".format(collection_name))
@@ -83,6 +99,7 @@ def main():
     else :
         
         logger.error("Index not created")
+        raise SystemExit(1)
             
 if __name__ == '__main__':
     main()

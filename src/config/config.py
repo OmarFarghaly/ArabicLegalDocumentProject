@@ -24,7 +24,7 @@ class Config(BaseSettings):
     LLM_PROVIDER: str = "vllm"
     LLM_MODEL_NAME: str = ""
     LLM_MODEL_NAME: str = "" #NOT YET SET
-    LLM_BASE_URL: str = "http://localhost:8000/v1"
+    LLM_BASE_URL: str = "http://vllm:8000/v1"
     LLM_API_KEY: str = "EMPTY"
     LLM_TIMEOUT_SECONDS: int = 120
     LLM_MAX_NEW_TOKENS: int = 512
@@ -46,11 +46,11 @@ class Config(BaseSettings):
     LLM_MAX_CONTEXT_CHARS: int = 12000
     LLM_RETRY_COUNT: int = 2
     LLM_RETRY_BACKOFF_SECONDS: int = 2
-    QDRANT_HOST: str = "localhost"
+    QDRANT_HOST: str = "qdrant"
     QDRANT_PORT: int = 6333
     # Cache Configuration
     CACHE_ENABLED: bool = True
-    REDIS_HOST: str = "localhost"
+    REDIS_HOST: str = "redis"
     REDIS_PORT: int = 6379
     CACHE_TTL_SECONDS: int = 3600
     SEMANTIC_CACHE_THRESHOLD: float = 0.12

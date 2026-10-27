@@ -1,13 +1,12 @@
-from qdrant_client import QdrantClient, models
+import time
+from typing import Optional
 
 from pydantic import BaseModel
-
-from typing import Literal, List, Dict , Optional
-
-from src.embeddings import EmbeddingModel
+from qdrant_client import QdrantClient, models
+from qdrant_client.http.exceptions import ResponseHandlingException
 
 from src.config import Config
-
+from src.embeddings import EmbeddingModel
 from src.logger import Logger
 
 config = Config()
@@ -38,7 +37,7 @@ class Payload(BaseModel):
 
 class QdrantVectorStore:
     
-    def __init__(self, host='localhost', port=6333):
+    def __init__(self, host='qdrant', port=6333):
         
         self.client = QdrantClient(host=host, port = port)
         
@@ -61,7 +60,7 @@ class QdrantVectorStore:
         collections = self.client.get_collections()
         
         collection_exists = any(
-            collection_name == collection
+            collection_name == collection.name
             for collection in collections.collections
         )
         
@@ -112,8 +111,20 @@ class QdrantVectorStore:
                                         )
             ]
             logger.info(f"Upserting point with ID: {response.count} into collection: {collection_name}")
-            self.client.upsert(
-                collection_name=collection_name, 
-                points=points
-            )
+            for attempt in range(3):
+                try:
+                    self.client.upsert(
+                        collection_name=collection_name,
+                        points=points,
+                    )
+                    break
+                except ResponseHandlingException as exc:
+                    if attempt == 2:
+                        raise
+                    delay = 2**attempt
+                    logger.warning(
+                        f"Qdrant upsert failed ({exc}); retrying in {delay}s "
+                        f"({attempt + 1}/3)"
+                    )
+                    time.sleep(delay)
             logger.info(f"Point with ID: {response.count} upserted successfully into collection: {collection_name}")

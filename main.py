@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+import os
 import torch
 from contextlib import asynccontextmanager
 from sentence_transformers import CrossEncoder
@@ -21,6 +22,7 @@ logger = Logger().logger
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     config = Config()
+    app.state.config = config
     
     logger.info("Initializing Embedding Models for Arabic Language.")
     
@@ -35,15 +37,24 @@ async def lifespan(app:FastAPI):
                                             english_embedding=app.state.english_embedding,
                                             host=config.QDRANT_HOST,
                                             port=config.QDRANT_PORT)
+    hf_token = os.getenv("HF_TOKEN") or None
     if torch.cuda.is_available():
         logger.info("CUDA is available. Initializing CrossEncoder on GPU.")
-        
+        logger.info(f"Loading reranker model: {config.RERANKER_MODEL}")
         cross_encoder = CrossEncoder(model_name_or_path=config.RERANKER_MODEL,
-                                  trust_remote_code=True).bfloat16().cuda() 
+                                  trust_remote_code=True,
+                                  token=hf_token,
+                                  device="cuda",
+                                  model_kwargs={"dtype": torch.float16}).eval() 
+        logger.info("CrossEncoder loaded successfully on GPU.")
     else :
         logger.info("CUDA is not available. Initializing CrossEncoder on CPU.")
+        logger.info(f"Loading reranker model: {config.RERANKER_MODEL}")
         cross_encoder = CrossEncoder(model_name_or_path=config.RERANKER_MODEL,
-                                          trust_remote_code=True).bfloat16()
+                                          trust_remote_code=True,
+                                          token=hf_token,
+                                          model_kwargs={"dtype": torch.float16}).eval()
+        logger.info("CrossEncoder loaded successfully on CPU.")
     logger.info("Initializing Reranker instance.")    
     app.state.reranker = Reranker(reranker_model=cross_encoder)
     logger.info("Initializing LLM instance.")
@@ -75,6 +86,54 @@ async def lifespan(app:FastAPI):
     
 app = FastAPI(lifespan=lifespan)
 
+
+@app.get("/health")
+async def health(request: Request):
+    checks = {}
+    config = request.app.state.config
+
+    try:
+        point_count = await request.app.state.qdrant_reterival.client.count(
+            collection_name=config.COLLECTION_NAME,
+            exact=False,
+        )
+        checks["qdrant"] = "healthy" if point_count.count > 0 else "unhealthy"
+        if point_count.count == 0:
+            logger.error("Health check failed: Qdrant collection has no points")
+    except Exception as exc:
+        logger.error(f"Health check failed for Qdrant: {exc}")
+        checks["qdrant"] = "unhealthy"
+
+    semantic_cache = request.app.state.semantic_cache
+    if semantic_cache is None:
+        checks["redis"] = "disabled"
+    else:
+        try:
+            await semantic_cache.client.ping()
+            checks["redis"] = "healthy"
+        except Exception as exc:
+            logger.error(f"Health check failed for Redis: {exc}")
+            checks["redis"] = "unhealthy"
+
+    try:
+        checks["vllm"] = (
+            "healthy"
+            if await request.app.state.llm.health_check()
+            else "unhealthy"
+        )
+    except Exception as exc:
+        logger.error(f"Health check failed for vLLM: {exc}")
+        checks["vllm"] = "unhealthy"
+
+    if any(status == "unhealthy" for status in checks.values()):
+        raise HTTPException(
+            status_code=503,
+            detail={"status": "unhealthy", "checks": checks},
+        )
+
+    return {"status": "healthy", "checks": checks}
+
+
 @app.middleware("http")
 async def add_security_headers(request, call_next):
     request_id = str(uuid4())
@@ -97,4 +156,3 @@ app.add_middleware(
     allow_headers=["*"],    
 )
 app.include_router(rag.rag_router)
-

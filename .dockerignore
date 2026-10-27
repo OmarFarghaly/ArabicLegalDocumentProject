@@ -1,0 +1,17 @@
+.git
+.venv
+.env
+.env.*
+!.env.example
+.dvc
+.pytest_cache
+.ruff_cache
+__pycache__
+**/__pycache__
+*.py[cod]
+data/raw
+evaluation
+experiments
+logs
+qdrant_storage
+tests

@@ -127,6 +127,23 @@ def test_build_request_fills_llm_request_fields():
     assert len(request.context_documents) == 1
 
 
+def test_prompt_requires_review_and_synthesis_of_all_relevant_articles():
+    request = build_llm_request(
+        "What rules apply?",
+        [numbered(147), numbered(148)],
+        "english",
+    )
+    prompt = " ".join(request.system_prompt.split())
+
+    assert "Review every article in" in prompt
+    assert "Do not stop at the first relevant article" in prompt
+    assert "combine them into one answer" in prompt
+    assert "do not add irrelevant articles" in prompt
+    assert len(request.context_documents) == 2
+    assert 'number="147"' in request.context_documents[0]
+    assert 'number="148"' in request.context_documents[1]
+
+
 def test_no_payloads_gives_empty_context():
     assert build_llm_request("question", [], "english").context_documents == []
 
