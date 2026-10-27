@@ -26,7 +26,7 @@ def get_payload_from_points(points):
 # embeds the question with the same model used for retrieval
 def embed_question(request: Request, text: str, lang: str):
     embedding = getattr(request.app.state, f"{lang}_embedding")
-    return embedding.embed_query(text)  # change to the real method name
+    return embedding.encode(text)  # change to the real method name
 
 
 @rag_router.post("/answer", response_model=LLMResponse)

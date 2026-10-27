@@ -44,3 +44,28 @@ def test_short_records_are_skipped(build_index_module, tmp_path):
     store.delete_collection.assert_called_once_with(collection_name="c")
     store.create_collection.assert_called_once_with(collection_name="c")
     assert store.create.call_count == 1
+
+
+def test_failed_record_fails_index_build(build_index_module, tmp_path):
+    import json
+
+    path = tmp_path / "a.json"
+    path.write_text(
+        json.dumps(
+            [
+                {
+                    "article_number": 1,
+                    "ar_text": "نص عربي طويل كفاية",
+                    "text_en": "long enough text",
+                }
+            ],
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    store = MagicMock()
+    store.create.side_effect = RuntimeError("Qdrant unavailable")
+    idx = build_index_module.IndexingStore(data_path=str(path), vector_store=store)
+
+    assert idx.build_index(collection_name="c") is False

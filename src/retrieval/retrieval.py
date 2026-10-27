@@ -12,7 +12,7 @@ logger = Logger().logger
 class Retrieval:
     
     def __init__(self, arabic_embedding: EmbeddingModel, english_embedding: EmbeddingModel,
-                 host = 'localhost', port=6333 ):
+                 host = 'qdrant', port=6333 ):
         
         self.host = host
         self.port = port
