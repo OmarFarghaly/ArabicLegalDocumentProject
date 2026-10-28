@@ -89,6 +89,20 @@ services:
       start_period: 10s
     networks:
       - app_network
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:4000
+    ports:
+      - "5173:80"
+    depends_on:
+      backend:
+        condition: service_started
+    networks:
+      - app_network
 
   vllm:
     image: vllm/vllm-openai:latest
@@ -99,6 +113,7 @@ services:
       - "8000:8000"
     volumes:
       - huggingface_cache:/root/.cache/huggingface
+      - vllm_cache:/root/.cache/vllm
     environment:
       HF_TOKEN: ${HF_TOKEN:-}
     command:
@@ -158,6 +173,7 @@ volumes:
   model_cache:
   redis_data:
   index_state:
+  vllm_cache:
 
 networks:
   app_network:
